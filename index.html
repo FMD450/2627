@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FMD 450 · Advanced Techniques in Multimedia Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Archivo:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFBF8; --ink:#151513; --panel:#F0F0EB; --mute:#8B8B84;
+  --rec:#E5231B; --line:#DDDDD6; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --disp:'Archivo',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.65}
+::selection{background:var(--ink);color:var(--paper)}
+nav{position:fixed;top:0;left:0;width:280px;height:100vh;border-right:1px solid var(--line);
+    padding:28px 22px;overflow-y:auto;background:var(--paper);z-index:10}
+nav .course{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:-.5px;line-height:1}
+nav .coursesub{font-size:11px;color:var(--mute);margin:8px 0 26px;line-height:1.5}
+nav ul{list-style:none}
+nav li a{display:flex;gap:10px;align-items:baseline;padding:7px 6px;color:var(--ink);
+  text-decoration:none;font-size:12.5px;border-radius:2px}
+nav li a:hover{background:var(--panel)}
+nav li a.active{background:var(--ink);color:var(--paper)}
+nav li a .n{color:var(--mute);font-size:11px;min-width:22px}
+nav li a.active .n{color:var(--paper);opacity:.6}
+nav li a .rec{width:7px;height:7px;border-radius:50%;background:var(--rec);margin-left:auto;
+  align-self:center;opacity:0}
+nav li a.active .rec{opacity:1;animation:blink 1.4s steps(1) infinite}
+@keyframes blink{50%{opacity:.25}}
+nav .foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:10.5px;color:var(--mute);line-height:1.7}
+@media(prefers-reduced-motion:reduce){nav li a.active .rec{animation:none}}
+main{margin-left:280px;max-width:760px;padding:48px 56px 120px}
+section.demo{display:none}
+section.demo.on{display:block}
+.week{font-size:11px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+h1{font-family:var(--disp);font-weight:900;font-size:44px;letter-spacing:-1px;line-height:1.02;
+   margin:6px 0 10px}
+.lede{font-size:14.5px;max-width:60ch;margin-bottom:36px;color:#333}
+h2{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.06em;
+   text-transform:uppercase;margin:44px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+h2 .stepno{color:var(--mute);margin-right:10px}
+h3{font-size:12.5px;font-weight:700;margin:20px 0 8px}
+p{margin-bottom:12px;max-width:66ch}
+p.note{font-size:12.5px;color:var(--mute);max-width:62ch}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+a:hover{color:var(--rec)}
+kbd{background:var(--panel);border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;
+  padding:1px 6px;font-size:11.5px;font-family:var(--mono)}
+ul.plain{margin:0 0 14px 18px}
+ul.plain li{margin-bottom:6px;max-width:62ch}
+.code{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  margin:14px 0 18px;overflow:hidden}
+.code pre{padding:16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.7;font-family:var(--mono)}
+.code .bar{display:flex;justify-content:space-between;align-items:center;
+  padding:6px 12px;border-bottom:1px solid var(--line);font-size:10.5px;color:var(--mute)}
+.code button{font-family:var(--mono);font-size:10.5px;background:none;border:1px solid var(--line);
+  border-radius:2px;padding:2px 10px;cursor:pointer;color:var(--ink)}
+.code button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cm{color:#7a7a72}
+.run{margin:0 0 18px}
+.run button.go{font-family:var(--mono);font-size:11px;border:1px solid var(--ink);background:var(--ink);
+  color:var(--paper);padding:5px 16px;border-radius:2px;cursor:pointer}
+.run button.go:hover{background:var(--rec);border-color:var(--rec)}
+.run .stage{margin-top:10px}
+.run iframe{border:1px solid var(--line);border-radius:3px;background:#fff}
+table{border-collapse:collapse;width:100%;margin:14px 0 18px;font-size:12.5px}
+th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);
+  border-bottom:1px solid var(--ink);padding:6px 10px 6px 0}
+td{border-bottom:1px solid var(--line);padding:8px 10px 8px 0;vertical-align:top}
+td:first-child{white-space:nowrap;font-weight:500}
+.sketch{border:1.5px solid var(--ink);border-radius:3px;padding:20px 22px;margin:48px 0 8px;position:relative}
+.sketch .tag{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.sketch .tag::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--rec)}
+.sketch p{margin-bottom:8px}
+.sketch .due{font-size:11.5px;color:var(--mute);margin-top:10px}
+.tip{border-left:3px solid var(--rec);padding:2px 0 2px 16px;margin:16px 0;font-size:12.5px;max-width:62ch}
+figure.lore{margin:0 0 30px;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:var(--panel)}
+figure.lore img{display:block;width:100%;height:auto}
+figure.lore figcaption{padding:8px 14px;font-size:10.5px;color:var(--mute);line-height:1.5}
+.intro{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:16px 18px;margin:0 0 28px;font-size:13px;max-width:66ch}
+.intro b{font-weight:700}
+ul.res{list-style:none;margin:0 0 14px}
+ul.res li{margin-bottom:7px;padding-left:16px;position:relative}
+ul.res li::before{content:"→";position:absolute;left:0;color:var(--mute)}
+#menu{display:none}
+@media(max-width:900px){
+  nav{transform:translateX(-100%);transition:transform .25s}
+  nav.open{transform:none}
+  main{margin-left:0;padding:70px 22px 100px}
+  #menu{display:block;position:fixed;top:14px;left:14px;z-index:20;font-family:var(--mono);
+    font-size:12px;background:var(--paper);border:1px solid var(--ink);border-radius:2px;padding:6px 14px}
+  @media(prefers-reduced-motion:reduce){nav{transition:none}}
+}
+:focus-visible{outline:2px solid var(--rec);outline-offset:2px}
+</style>
+</head>
+<body>
+<button id="menu" aria-label="Toggle demo list">demos</button>
+<nav id="nav">
+  <div class="course">FMD 450</div>
+  <div class="coursesub">Advanced Techniques in Multimedia Design<br>Fall 2026 · Mon + Wed<br>Mahmoud Hamdy</div>
+  <ul id="navlist">
+    <li><a href="#d01"><span class="n">01</span>Hydra I · Signals<span class="rec"></span></a></li>
+    <li><a href="#d02"><span class="n">02</span>Hydra II · Systems<span class="rec"></span></a></li>
+    <li><a href="#d03"><span class="n">03</span>p5.js<span class="rec"></span></a></li>
+    <li><a href="#d04"><span class="n">04</span>P5LIVE<span class="rec"></span></a></li>
+    <li><a href="#d05"><span class="n">05</span>TouchDesigner I · TOPs<span class="rec"></span></a></li>
+    <li><a href="#d06"><span class="n">06</span>TouchDesigner II · CHOPs + Instancing<span class="rec"></span></a></li>
+    <li><a href="#d07"><span class="n">07</span>Sound + Audio-Reactivity<span class="rec"></span></a></li>
+    <li><a href="#d08"><span class="n">08</span>Projection + Mapping in Code<span class="rec"></span></a></li>
+    <li><a href="#d09"><span class="n">09</span>Sensors + Inputs<span class="rec"></span></a></li>
+  </ul>
+  <div class="foot">One demo per session. One sketch per demo, due the following Monday.<br><br>Sketches are small: one honest evening of work.</div>
+  <div class="foot"><b>Credits.</b> This site teaches with tools made by others: <a href="https://ojack.xyz" target="_blank" rel="noopener">Hydra by Olivia Jack</a> · <a href="https://p5js.org" target="_blank" rel="noopener">p5.js by the Processing Foundation</a> (created by Lauren McCarthy; Processing by Casey Reas + Ben Fry) · <a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE by Ted Davis</a> · <a href="https://derivative.ca" target="_blank" rel="noopener">TouchDesigner by Derivative</a> · <a href="https://github.com/glowbox/maptasticjs" target="_blank" rel="noopener">Maptastic by Glowbox</a> · <a href="https://github.com/gohai/p5.webserial" target="_blank" rel="noopener">p5.webserial by Gottfried Haider</a>. Type: JetBrains Mono (JetBrains) + Archivo (Omnibus-Type), both under the SIL Open Font License, served via Google Fonts. Course materials by Mahmoud Hamdy, FMD 450, for educational use.</div>
+</nav>
+<main>
+<!-- ============ DEMO 01 HYDRA I ============ -->
+<section class="demo" id="d01">
+<div class="week">Demo 01</div>
+<h1>Hydra I · Signals</h1>
+<p class="lede">Live-coded video synthesis in the browser, made by Olivia Jack. Nothing to install. Sources flow through transforms into outputs, and every number can move. Today: the full signal vocabulary. Next session: systems: feedback, buffers, external sources, and performing.</p>
+<div class="intro"><b>Some lore before we start.</b> In the 1960s, synthesizers were furniture: walls of modules (oscillators, filters, mixers) connected by patch cables, where sound was a voltage you could physically re-route. Video artists built the same idea for images: machines like the Sandin Image Processor and Rutt/Etra scan processor bent the TV signal itself, live. Hydra, made by Olivia Jack in 2018, is that whole room of machines compressed into a browser tab: the functions you chain today are patch cables, and <i>modulate</i> is literally one signal plugged into another's input. When your patch feels like plumbing, that is the correct feeling.</div>
+
+
+<h2><span class="stepno">01</span>The editor</h2>
+<p>Open <a href="https://hydra.ojack.xyz" target="_blank" rel="noopener">hydra.ojack.xyz</a>. Run the current line/block: <kbd>ctrl</kbd>+<kbd>enter</kbd>. Run the whole page: <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>enter</kbd>. Clear all visuals: run <code>hush()</code>. Hide/show the code: <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>h</kbd>. Random example: the dice button; read those examples like flashcards, one line at a time.</p>
+
+<h2><span class="stepno">02</span>Sources: your raw material</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>osc(10, 0.1, 1.2).out()    <span class="cm">// oscillator: frequency, sync (scroll speed), color offset</span>
+noise(4, 0.2).out()        <span class="cm">// perlin field: scale, speed</span>
+shape(3, 0.4, 0.01).out()  <span class="cm">// polygon: sides, radius, edge smoothing</span>
+gradient(0.4).out()        <span class="cm">// rgb gradient cycling at speed</span>
+voronoi(8, 0.5, 0.2).out() <span class="cm">// cellular pattern: density, speed, blending</span>
+solid(1, 0.2, 0.1).out()   <span class="cm">// flat color: r, g, b</span></pre></div>
+<p>Six sources are the entire alphabet. Everything else is what you do to them.</p>
+<div class="run" data-hydra="osc(10,0.1,1.2).rotate(0.2).out()">
+<button class="go">run this patch</button><div class="stage"></div></div>
+
+
+<h2><span class="stepno">03</span>Geometry transforms</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>osc(20, 0.05, 1.3)
+  .rotate(0.4)          <span class="cm">// radians; try Math.PI/4</span>
+  .scale(1.5)           <span class="cm">// &gt;1 zooms in, &lt;1 tiles out</span>
+  .pixelate(40, 40)     <span class="cm">// mosaic resolution x, y</span>
+  .repeat(3, 2)         <span class="cm">// tile: x times, y times</span>
+  .kaleid(5)            <span class="cm">// mirror segments</span>
+  .scroll(0.1, 0)       <span class="cm">// wrap-around movement x, y</span>
+  .out()</pre></div>
+<p>Comment lines in and out with <code>//</code> and re-run: this is how you learn what each one owns. <code>invert()</code>, <code>posterize(4)</code>, <code>thresh(0.5)</code>, <code>luma(0.4)</code> live on the color side: try each alone.</p>
+
+<h2><span class="stepno">04</span>Color as a channel</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>noise(3, 0.1)
+  .color(1.2, 0.4, 0.3)     <span class="cm">// multiply r, g, b</span>
+  .saturate(2)
+  .contrast(1.4)
+  .brightness(0.05)
+  .hue(0.2)
+  .out()
+
+<span class="cm">// negative numbers are legal and strange: color(-1, 1, 0.5)</span></pre></div>
+
+<h2><span class="stepno">05</span>Blending: two signals, one screen</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>osc(10, 0.1, 0.9)
+  .add(shape(4, 0.3).rotate(0.3), 0.6)   <span class="cm">// light: sum, amount 0-1</span>
+  .out()
+
+osc(10).mult(shape(24, 0.6, 0.4)).out()  <span class="cm">// mask: shape cuts the osc</span>
+osc(10).diff(osc(9).rotate(0.1)).out()   <span class="cm">// interference between near-twins</span>
+osc(10).blend(noise(3), 0.4).out()       <span class="cm">// crossfade at 40%</span>
+osc(10).layer(shape(3).luma(0.4)).out()  <span class="cm">// stack with transparency via luma</span>
+osc(10).mask(shape(2, 0.5, 0.2)).out()   <span class="cm">// hard stencil</span></pre></div>
+<p>Photoshop blend modes, live. <code>diff</code> between two slightly different oscillators is the classic moiré trick: near-identical signals produce the richest interference.</p>
+
+<h2><span class="stepno">06</span>Modulate: signals bending signals</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>osc(30, 0.1, 1)
+  .modulate(noise(3, 0.2), 0.4)   <span class="cm">// noise pushes the osc's pixels</span>
+  .out()
+
+<span class="cm">// each transform has a modulate twin:</span>
+osc(20).modulateRotate(osc(4), 0.6).out()
+osc(20).modulateScale(shape(3), 0.4).out()
+osc(20).modulateKaleid(noise(2), 4).out()
+osc(20).modulatePixelate(noise(5), 100).out()
+voronoi(6).modulateScrollX(osc(2), 0.2).out()</pre></div>
+<p>Modulation is where Hydra stops being stripes. The second signal is invisible; only its influence shows. Ask of every patch: what is seen, and what is only felt?</p>
+<div class="run" data-hydra="osc(30,0.1,1).modulate(noise(3,0.2),0.4).out()">
+<button class="go">run this patch</button><div class="stage"></div></div>
+
+
+<h2><span class="stepno">07</span>Numbers that move by themselves</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre><span class="cm">// any parameter accepts a function of time:</span>
+osc(() => 10 + Math.sin(time) * 8, 0.1, 1).out()
+
+<span class="cm">// or an array: hydra steps through it to the beat</span>
+osc([10, 40, 80], 0.1, [0.5, 1.5]).out()
+
+<span class="cm">// array methods shape the rhythm:</span>
+shape([3, 4, 5, 6].fast(2), 0.4).out()      <span class="cm">// twice the speed</span>
+osc(30, 0.1, [0, 1.5].smooth()).out()        <span class="cm">// glide, not step</span></pre></div>
+<p><code>time</code> is a global clock in seconds. <code>() =&gt;</code> makes any parameter a living function; arrays make it a sequencer. This one idea turns a still patch into a composition.</p>
+
+<h2><span class="stepno">08</span>Mouse as modulator</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>osc(20, 0.05, 1)
+  .modulate(noise(3), () => mouse.x / width)
+  .rotate(() => mouse.y / height * 3.14)
+  .out()</pre></div>
+
+<h2><span class="stepno">09</span>Resources</h2>
+<ul class="res">
+<li><a href="https://hydra.ojack.xyz/docs/" target="_blank" rel="noopener">Hydra documentation</a>: the official getting-started and guides</li>
+<li><a href="https://hydra.ojack.xyz/functions/" target="_blank" rel="noopener">Interactive function reference</a>: every function with a live editable example</li>
+<li><a href="https://hydra.ojack.xyz/garden/" target="_blank" rel="noopener">Hydra garden</a>: community, examples, performances</li>
+<li><a href="https://github.com/naotohieda/hydra-book" target="_blank" rel="noopener">Hydra Book</a> by Naoto Hieda: techniques organized as a free book</li>
+<li><a href="https://github.com/hydra-synth" target="_blank" rel="noopener">hydra-synth on GitHub</a>: the source, extensions, and related projects</li>
+</ul>
+<div class="tip">Read one patch aloud in signal-path English before you run it: "an oscillator, kaleided by noise, differenced against its twin." If you cannot say it, you copied it.</div>
+
+<div class="sketch">
+<div class="tag">Sketch 01 · Hydra signals</div>
+<p>One patch using at least three different sources, two modulate variants, and one array or function-driven parameter. It should reward a full minute of watching. Submit the sketch URL (the code encodes into the address bar) and a 60-second screen recording.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+
+<!-- ============ DEMO 02 HYDRA II ============ -->
+<section class="demo" id="d02">
+<div class="week">Demo 02</div>
+<h1>Hydra II · Systems</h1>
+<p class="lede">Session two: Hydra as an instrument. Feedback, the four output buffers, external sources (camera, video, screen, images), writing your own functions, resolution and recording: everything you need to move from patches to pieces, and to perform live.</p>
+
+<h2><span class="stepno">01</span>Feedback: the screen remembers</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>src(o0)
+  .scale(1.01)
+  .rotate(0.003)
+  .blend(osc(6, 0.1, 1.4), 0.08)
+  .out(o0)</pre></div>
+<p><code>src(o0)</code> reads the output back in: each frame inherits the last, scaled slightly. Change <code>scale(1.01)</code> to <code>0.99</code>: the trail falls inward instead of out. The blend amount is the ink flow: lower = longer memory.</p>
+
+<h2><span class="stepno">02</span>Feedback recipes</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre><span class="cm">// echo trails on a moving shape</span>
+shape(4, 0.2)
+  .scrollX(() => Math.sin(time) * 0.3)
+  .layer(src(o0).scale(1.03).luma(0.1).color(0.9, 0.9, 0.9))
+  .out(o0)
+
+<span class="cm">// smear: modulated feedback</span>
+src(o0)
+  .modulate(noise(4, 0.1), 0.008)
+  .blend(shape(3, 0.3).rotate(() => time * 0.2), 0.04)
+  .out(o0)</pre></div>
+<p>Two families: transform feedback (echo, zoom, spin) and modulated feedback (smear, melt). Every video-feedback piece you have ever seen is one of these two with taste.</p>
+
+<h2><span class="stepno">03</span>Four buffers: o0 to o3</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>osc(20, 0.1, 1).out(o0)          <span class="cm">// build in separate buffers</span>
+noise(4).thresh(0.6).out(o1)
+
+src(o0).mult(src(o1)).out(o2)    <span class="cm">// combine them in a third</span>
+
+render(o2)                        <span class="cm">// show one buffer fullscreen</span>
+<span class="cm">// render() with no argument: all four in a grid: your mixing desk view</span></pre></div>
+<p>Buffers are layers you can keep working on independently: a background system in o0, a mask in o1, the mix in o2. <code>render()</code> alone is how you monitor everything while performing.</p>
+
+<h2><span class="stepno">04</span>External sources: s0 to s3</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>s0.initCam()                    <span class="cm">// webcam</span>
+s1.initImage("https://upload.wikimedia.org/wikipedia/commons/2/25/Hydra-Foto.jpg")
+s2.initVideo("myclip.mp4")      <span class="cm">// a hosted mp4 url</span>
+s3.initScreen()                 <span class="cm">// capture another window: browser asks which</span>
+
+src(s0)
+  .modulate(src(s0).scale(1.01), 0.01)  <span class="cm">// camera modulating itself</span>
+  .saturate(1.3)
+  .out()</pre></div>
+<p><code>initScreen()</code> is the sleeper: capture a browser tab playing your own footage, a p5 sketch, or a video call, and Hydra becomes a live effects processor for anything on your machine. This is also the bridge for footage: host clips (GitHub works) and pull them with <code>initVideo</code>.</p>
+
+<h2><span class="stepno">05</span>Write your own transforms</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre><span class="cm">// a reusable look, defined once:</span>
+const vhs = (sig) => sig
+  .saturate(0.7)
+  .contrast(1.2)
+  .modulateScrollX(noise(1, 0.5), 0.003)
+  .blend(noise(30), 0.06)
+
+vhs(src(s0)).out()               <span class="cm">// apply to camera</span>
+vhs(osc(10, 0.1, 1)).out(o1)     <span class="cm">// or to anything</span></pre></div>
+<p>JavaScript functions bottle a look. Build a personal library of three or four: your grade, your texture, your glitch: and every performance starts from your own voice instead of defaults.</p>
+
+<h2><span class="stepno">06</span>Resolution, speed, quality</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>setResolution(1920, 1080)   <span class="cm">// match your output/projector</span>
+speed = 0.5                 <span class="cm">// global clock multiplier</span>
+bpm = 120                   <span class="cm">// array stepping tempo</span></pre></div>
+
+<h2><span class="stepno">07</span>Recording and performing</h2>
+<ul class="plain">
+<li>Record: screen-record the tab (macOS <kbd>cmd</kbd>+<kbd>shift</kbd>+<kbd>5</kbd>) or capture the tab in OBS for clean 1080p.</li>
+<li>Perform: hide code with <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>h</kbd>, or keep it visible: live coding shows the instrument, and audiences love it.</li>
+<li>Prepare a set: one text file, patches separated by comments, run block by block. Improvise the numbers, not the structure.</li>
+<li>Fullscreen on a projector: this is already projection-ready: demo 08 picks this up.</li>
+</ul>
+
+<div class="tip">Study session: pick one artist performance from the hydra community (the <a href="https://hydra.ojack.xyz/garden/" target="_blank" rel="noopener">hydra garden</a> links out) and reverse-engineer one moment of it in your own patch.</div>
+
+<div class="sketch">
+<div class="tag">Sketch 02 · Hydra systems</div>
+<p>A performed piece: 90 seconds, screen-recorded in one take while you live-code it. Must use feedback, at least two buffers combined with render logic, and one external source (camera, screen, video, or image). Include your patch file.</p>
+<p class="due">Due Wednesday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+<!-- ============ DEMO 03 P5 ============ -->
+<section class="demo" id="d03">
+<div class="week">Demo 03</div>
+<h1>p5.js</h1>
+<p class="lede">A JavaScript library for drawing, animation, and interaction: where Hydra is a synthesizer, p5 is a sketchbook: every mark is yours. Work at <a href="https://editor.p5js.org" target="_blank" rel="noopener">editor.p5js.org</a> (make an account) and keep the <a href="https://p5js.org/reference/" target="_blank" rel="noopener">reference</a> open in a tab: it is the actual textbook of this course.</p>
+<div class="intro"><b>Some lore.</b> In 2001, Casey Reas and Ben Fry built Processing at the MIT Media Lab: a language that treated code as a sketchbook for artists rather than an engineering tool, and it quietly rewired a generation of design education. In 2014 Lauren McCarthy rebuilt the idea for the web as p5.js, with a community famous for being kind to beginners. When you type <i>setup()</i> and <i>draw()</i>, you are using a convention two decades of artists have thought in: it is less a library than a dialect.</div>
+
+
+<h2><span class="stepno">01</span>setup + draw</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  createCanvas(600, 600)   <span class="cm">// runs once</span>
+}
+
+function draw() {
+  background(245)          <span class="cm">// runs 60×/second, forever</span>
+  circle(300, 300, 200)
+}</pre></div>
+<p>Comment out <code>background()</code> and drawings accumulate: that single decision (clear or keep) splits all of p5 into animation versus painting.</p>
+
+<h2><span class="stepno">02</span>Shape + coordinates</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>rect(50, 50, 200, 100)         <span class="cm">// x, y, w, h · origin top-left, y grows down</span>
+circle(300, 300, 120)
+ellipse(300, 300, 160, 80)
+line(0, 0, width, height)
+triangle(100, 300, 200, 100, 300, 300)
+
+beginShape()                    <span class="cm">// any polygon, point by point</span>
+vertex(100, 100)
+vertex(300, 150)
+vertex(200, 320)
+endShape(CLOSE)
+
+strokeWeight(4)
+noFill()</pre></div>
+
+<h2><span class="stepno">03</span>Color</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>fill(229, 35, 27)          <span class="cm">// rgb</span>
+fill(229, 35, 27, 120)     <span class="cm">// + alpha: transparency is a design tool</span>
+stroke(21)
+noStroke()
+
+colorMode(HSB, 360, 100, 100)   <span class="cm">// hue-based thinking</span>
+fill(200, 80, 90)               <span class="cm">// a hue you can reason about</span>
+lerpColor(color('#151513'), color('#E5231B'), 0.5)  <span class="cm">// mix two colors</span></pre></div>
+
+<h2><span class="stepno">04</span>Variables</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>let x = 0
+let speed = 2
+
+function setup() { createCanvas(600, 600) }
+
+function draw() {
+  background(245)
+  circle(x, 300, 100)
+  x = x + speed
+  if (x > width + 50) x = -50   <span class="cm">// wrap around</span>
+}</pre></div>
+<div class="run" data-sketch="let x=0;function setup(){createCanvas(360,240)}function draw(){background(245);noStroke();fill(21,21,19);circle(x,120,70);x+=2;if(x>width+35)x=-35}">
+<button class="go">run this sketch</button><div class="stage"></div></div>
+
+<h2><span class="stepno">05</span>Conditionals + interaction</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function draw() {
+  background(245)
+  if (mouseIsPressed) {
+    fill(229, 35, 27)
+  } else {
+    fill(21)
+  }
+  let d = dist(mouseX, mouseY, width/2, height/2)
+  circle(width/2, height/2, d)      <span class="cm">// distance as a design value</span>
+}
+
+function keyPressed() {
+  if (key === 's') saveCanvas('frame', 'png')
+}</pre></div>
+<div class="run" data-sketch="function setup(){createCanvas(360,240)}function draw(){background(245);let d=dist(mouseX,mouseY,width/2,height/2);noStroke();if(mouseIsPressed){fill(229,35,27)}else{fill(21)}circle(width/2,height/2,max(d,10))}">
+<button class="go">run this sketch (move your mouse, click)</button><div class="stage"></div></div>
+
+
+<h2><span class="stepno">06</span>Loops: one rule, many marks</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function draw() {
+  background(245)
+  for (let x = 0; x &lt; width; x += 40) {
+    for (let y = 0; y &lt; height; y += 40) {
+      let s = noise(x * 0.01, y * 0.01, frameCount * 0.01) * 36
+      circle(x + 20, y + 20, s)
+    }
+  }
+}</pre></div>
+<div class="run" data-sketch="function setup(){createCanvas(360,240)}function draw(){background(245);noStroke();fill(21,21,19);for(let x=0;x<width;x+=30){for(let y=0;y<height;y+=30){let s=noise(x*0.01,y*0.01,frameCount*0.01)*26;circle(x+15,y+15,s)}}}">
+<button class="go">run this sketch</button><div class="stage"></div></div>
+
+<h2><span class="stepno">07</span>random() vs noise()</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>random(width)            <span class="cm">// dice: a new unrelated value each call</span>
+noise(t)                 <span class="cm">// weather: smooth, continuous, 0-1</span>
+
+let t = 0
+function draw() {
+  background(245, 20)    <span class="cm">// low-alpha background = trails</span>
+  circle(noise(t) * width, noise(t + 99) * height, 50)
+  t += 0.01
+}
+
+randomSeed(42)           <span class="cm">// same "random" every run: repeatable variation</span>
+noiseSeed(42)</pre></div>
+<div class="run" data-sketch="let t=0;function setup(){createCanvas(360,240)}function draw(){background(245,245,243,14);noStroke();fill(229,35,27);circle(noise(t)*width,noise(t+99)*height,32);t+=0.008}">
+<button class="go">run this sketch</button><div class="stage"></div></div>
+
+
+<h2><span class="stepno">08</span>Transformations</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function draw() {
+  background(245)
+  translate(width/2, height/2)     <span class="cm">// move the origin</span>
+  rotate(frameCount * 0.01)        <span class="cm">// everything after rotates</span>
+  rect(-100, -100, 200, 200)
+
+  push()                            <span class="cm">// save the current state</span>
+  rotate(PI/4); scale(0.5)
+  circle(200, 0, 80)
+  pop()                             <span class="cm">// restore: transforms are scoped</span>
+}</pre></div>
+<div class="run" data-sketch="function setup(){createCanvas(360,240)}function draw(){background(245);translate(width/2,height/2);noFill();stroke(21);for(let i=0;i<12;i++){push();rotate(frameCount*0.005+i*TWO_PI/12);rect(60,-20,60,40);pop()}}">
+<button class="go">run this sketch</button><div class="stage"></div></div>
+<p><code>push()/pop()</code> around every transformed element: the habit that keeps complex sketches sane. Circular layouts: <code>rotate</code> then draw at a fixed radius, inside a loop: that is exactly what the sketch above does.</p>
+
+<h2><span class="stepno">09</span>Media: images and video</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>let img, cam
+function preload() {
+  img = loadImage('photo.jpg')     <span class="cm">// upload via the editor's file panel</span>
+}
+function setup() {
+  createCanvas(640, 480)
+  cam = createCapture(VIDEO)
+  cam.size(640, 480)
+  cam.hide()
+}
+function draw() {
+  image(cam, 0, 0)                 <span class="cm">// or image(img, 0, 0, width, height)</span>
+  <span class="cm">// generative layer over live video:</span>
+  stroke(229, 35, 27)
+  for (let i = 0; i &lt; 20; i++) {
+    let y = noise(i, frameCount * 0.01) * height
+    line(0, y, width, y)
+  }
+}</pre></div>
+<p>Swap <code>createCapture</code> for <code>createVideo('clip.mp4')</code> (then <code>.loop()</code>) to draw over your own footage: two kinds of image, one frame: the FMD 405 Project 1 move. <code>img.get(x, y)</code> reads a pixel's color: sample your footage to drive the drawing.</p>
+
+<h2><span class="stepno">10</span>Type</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>let f
+function preload() { f = loadFont('font.otf') }
+function setup() {
+  createCanvas(800, 400)
+  textFont(f); textSize(120); textAlign(CENTER, CENTER)
+}
+function draw() {
+  background(245); fill(21)
+  text('SIGNAL', width/2, height/2 + sin(frameCount * 0.05) * 20)
+}
+
+<span class="cm">// letters as particles:</span>
+let pts = f.textToPoints('SIGNAL', 80, 260, 160, { sampleFactor: 0.2 })</pre></div>
+
+<h2><span class="stepno">11</span>Export</h2>
+<p><code>saveCanvas('name', 'png')</code> for stills; <code>saveGif('loop', 4)</code> records four seconds as a GIF: perfect for sketch submissions. For video, screen-record, or meet CCapture later in the semester.</p>
+
+<div class="tip">Errors live in the console at the bottom of the editor, with a line number. Ninety percent of them are a missing bracket or a lowercase/uppercase mismatch. Read before asking.</div>
+
+<div class="sketch">
+<div class="tag">Sketch 03 · p5.js</div>
+<p>A sketch built on a loop (grid, ring, swarm) using <code>noise()</code> for motion, <code>push/pop</code> transforms, and one meaningful interaction. Bonus layer: draw it over camera or your own footage. Submit the editor link and a GIF or recording.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+
+<!-- ============ DEMO 04 P5LIVE ============ -->
+<section class="demo" id="d04">
+<div class="week">Demo 04</div>
+<h1>P5LIVE</h1>
+<p class="lede"><a href="https://teddavis.org" target="_blank" rel="noopener">Ted Davis</a>'s live-coding environment for p5.js: your sketch recompiles as you type, fullscreen, with collaborative rooms. Same p5 you already know, performed instead of composed. Runs at <a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">teddavis.org/p5live</a>: nothing to install.</p>
+
+<div class="intro"><b>Some lore.</b> Live coding comes from music: since the early 2000s, performers have written code on stage, projected for the audience, at events called algoraves: the community's founding document literally demands "show us your screens." The thrill is honesty: every crash and every save happens in public. P5LIVE, built by Ted Davis, brings that culture to p5: the sketch never stops while you rewrite it, which changes coding from composing into performing.</div>
+<h2><span class="stepno">01</span>Orientation</h2>
+<ul class="plain">
+<li>Code floats over the fullscreen canvas. <kbd>ctrl</kbd>+<kbd>enter</kbd> recompiles; with live-coding mode active it recompiles as you type.</li>
+<li>The menu hides on the left edge: sketches save to your browser's local storage: export your code regularly (settings → export) because local storage is not a backup.</li>
+<li>Press <kbd>ctrl</kbd>+<kbd>,</kbd> (or the menu) for settings: font size, theme, autocompile.</li>
+<li>References panel and shortcuts list live in the menu: skim them once now.</li>
+</ul>
+
+<h2><span class="stepno">02</span>softCompile: the reason P5LIVE exists</h2>
+<div class="code"><div class="bar"><span>p5live</span><button data-copy>copy</button></div>
+<pre>let n = 0
+
+function setup() {
+  createCanvas(windowWidth, windowHeight)
+  background(245)
+}
+
+function draw() {
+  fill(21, 10)
+  noStroke()
+  circle(noise(n) * width, noise(n + 9) * height, 60)
+  n += 0.005
+}</pre></div>
+<p>Change a number in <code>draw()</code> and recompile: P5LIVE's softCompile only re-runs the changed functions, so your canvas is not cleared and your variables keep their values: the piece evolves without restarting. Change <code>setup()</code> and it hard-compiles (fresh canvas). Live coding is learning which of your edits are soft and which are hard.</p>
+
+<h2><span class="stepno">03</span>Write for performance</h2>
+<ul class="plain">
+<li>Global "dials" at the top: <code>let SIZE = 60, SPEED = 0.005, HUE = 0</code>: performing is editing the dials.</li>
+<li>Low-alpha backgrounds (<code>background(245, 8)</code>) or none: accumulation reads better live than hard resets.</li>
+<li>Keep a few commented blocks ready and un-comment them as the set builds: structure prepared, numbers improvised: same discipline as Hydra II.</li>
+</ul>
+
+<h2><span class="stepno">04</span>COCODING: the shared sketch</h2>
+<p>From the menu, start a COCODING session: you get a room URL; everyone who opens it types into the same sketch, live. Class exercise today: one room, one rule ("only circles; only two colors"), everyone adds one function. Chaos is the point: then we discuss what survived. The host can lock the room and grant write access selectively: useful when chaos stops being the point.</p>
+
+<h2><span class="stepno">05</span>Hydra inside P5LIVE</h2>
+<div class="code"><div class="bar"><span>p5live</span><button data-copy>copy</button></div>
+<pre><span class="cm">// P5LIVE can load libraries via a comment at the top:</span>
+// libs: https://unpkg.com/hydra-synth
+
+let hydra
+function setup() {
+  createCanvas(windowWidth, windowHeight)
+  hydra = new Hydra({ detectAudio: false }).synth
+  hydra.osc(10, 0.1, 1.2).out()      <span class="cm">// hydra running under p5</span>
+}
+
+function draw() {
+  <span class="cm">// draw p5 on top of the hydra canvas layer</span>
+  fill(245); noStroke()
+  circle(mouseX, mouseY, 80)
+}</pre></div>
+<p>The two tools you know become one instrument: Hydra textures under p5 drawing. If the libs line trips you up today, run them side by side (two windows) and composite later: the point is the mindset, not the plumbing.</p>
+
+<h2><span class="stepno">06</span>Snippets</h2>
+<p>P5LIVE ships a snippets menu (WEBGL templates, audio input, recording helpers): browse it before writing from scratch. Anything you paste, read line by line and be able to explain at crit: the snippet rule of this studio.</p>
+
+<h2><span class="stepno">07</span>Recording your set</h2>
+<ul class="plain">
+<li>P5LIVE's menu includes an export/recording helper among the snippets: test it before the night you need it.</li>
+<li>The reliable fallback: OBS or the system screen recorder, capturing the fullscreen tab at 1080p. Record the audio of the room if you are performing to sound.</li>
+<li>Keep the code visible in the recording: in this course the typing is part of the work.</li>
+</ul>
+
+<h2><span class="stepno">08</span>Five starters to live-edit</h2>
+<p>Paste one, run it, then change it live: sizes, counts, colors, speeds. Each is deliberately underdesigned: the performance is what you grow it into.</p>
+<div class="code"><div class="bar"><span>p5live · walkers</span><button data-copy>copy</button></div>
+<pre>let w = []
+function setup() {
+  createCanvas(windowWidth, windowHeight)
+  background(245)
+  for (let i = 0; i &lt; 40; i++) w.push({x: width/2, y: height/2})
+}
+function draw() {
+  stroke(21, 40)
+  for (let p of w) {
+    let nx = p.x + random(-4, 4), ny = p.y + random(-4, 4)
+    line(p.x, p.y, nx, ny)
+    p.x = nx; p.y = ny
+  }
+}</pre></div>
+<div class="code"><div class="bar"><span>p5live · breathing grid</span><button data-copy>copy</button></div>
+<pre>function setup() { createCanvas(windowWidth, windowHeight) }
+function draw() {
+  background(245)
+  noStroke(); fill(21)
+  for (let x = 40; x &lt; width; x += 60)
+    for (let y = 40; y &lt; height; y += 60)
+      circle(x, y, 30 + sin(frameCount * 0.03 + x * 0.01 + y * 0.01) * 24)
+}</pre></div>
+<div class="code"><div class="bar"><span>p5live · orbit type</span><button data-copy>copy</button></div>
+<pre>let msg = 'FMD450'
+function setup() {
+  createCanvas(windowWidth, windowHeight)
+  textSize(48); textAlign(CENTER, CENTER); fill(21); noStroke()
+}
+function draw() {
+  background(245, 30)
+  translate(width/2, height/2)
+  for (let i = 0; i &lt; msg.length; i++) {
+    push()
+    rotate(frameCount * 0.01 + i * TWO_PI / msg.length)
+    text(msg[i], 180, 0)
+    pop()
+  }
+}</pre></div>
+<div class="code"><div class="bar"><span>p5live · scanline</span><button data-copy>copy</button></div>
+<pre>let y = 0
+function setup() {
+  createCanvas(windowWidth, windowHeight)
+  background(245)
+}
+function draw() {
+  stroke(229, 35, 27); strokeWeight(2)
+  line(0, y, width, y)
+  stroke(245, 200)
+  line(0, y - 40, width, y - 40)
+  y = (y + 3) % height
+}</pre></div>
+<div class="code"><div class="bar"><span>p5live · mouse storm</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  createCanvas(windowWidth, windowHeight)
+  background(245)
+}
+function draw() {
+  if (mouseIsPressed) {
+    stroke(21, 60)
+    let a = random(TWO_PI), r = random(80)
+    line(mouseX, mouseY, mouseX + cos(a) * r, mouseY + sin(a) * r)
+  }
+}</pre></div>
+<div class="tip">Local storage means your sketches live in this browser on this machine. Export a .json backup at the end of every session. One lost set teaches this lesson permanently; skip the lesson.</div>
+
+<div class="sketch">
+<div class="tag">Sketch 04 · P5LIVE</div>
+<p>A 90-second live-coded performance, screen-recorded in one take: start from under ten lines and grow it live. At least one softCompile evolution (values carrying over) must be visible. Plus: join the class COCODING room during the week and leave one signed contribution.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+<!-- ============ DEMO 05 TD I ============ -->
+<section class="demo" id="d05">
+<div class="week">Demo 05</div>
+<h1>TouchDesigner I · TOPs</h1>
+<p class="lede">Node-based real-time visuals: instead of writing code, you connect boxes with wires, and each box does one thing to the image. Today we build one patch together, start to finish, step by step. If you follow every step you will end with footage melting through noise, with trails, rendered to a video file.</p>
+<div class="intro"><b>Some lore.</b> TouchDesigner comes from Derivative in Toronto, and its family tree runs straight to Houdini, the film-industry tool behind most Hollywood effects. It grew up in concerts and installations: stadium visuals, museum pieces, and stage shows for artists from deadmau5 upward run on TD networks. The wall-of-modules idea from the Hydra demo is literal here: every box is a module, every wire is a patch cable, and unlike a rendered video, the whole thing is alive at 60 frames a second.</div>
+
+<h2><span class="stepno">01</span>Setup (do this before class)</h2>
+<ul class="plain">
+<li>Go to <a href="https://derivative.ca" target="_blank" rel="noopener">derivative.ca</a> → Download. Install like any app.</li>
+<li>First launch asks you to create a Derivative account and pick a license: choose <b>Non-Commercial</b> (free). It covers everything we do.</li>
+<li>Put one short video clip (any mp4, phone footage is fine) on your desktop: we will use it in step 04.</li>
+</ul>
+
+<h2><span class="stepno">02</span>Open TD and clear the stage</h2>
+<ul class="plain">
+<li>Open TouchDesigner. You see a network of example boxes: these are nodes (TD calls them operators).</li>
+<li>Drag a box to select all of them (or <kbd>ctrl</kbd>+<kbd>a</kbd>), press <kbd>delete</kbd>. Empty grid: this is your patching space.</li>
+<li>Move around: hold <b>middle mouse</b> and drag to pan, <b>scroll</b> to zoom. Practice for ten seconds: navigation is half of TD comfort.</li>
+</ul>
+
+<h2><span class="stepno">03</span>Make your first node</h2>
+<ul class="plain">
+<li>Double-click on empty space. A menu appears with tabs across the top: TOP, CHOP, SOP... These are node families. Stay on <b>TOP</b>: the family that carries images.</li>
+<li>Click <b>Movie File In</b>. A node appears showing a default video (a banana; long story).</li>
+<li>Click the node once to select it, press <kbd>p</kbd>: its parameters open. Every node has these: this panel is where all the knobs live. Press <kbd>p</kbd> again to close.</li>
+</ul>
+
+<h2><span class="stepno">04</span>Load your own footage</h2>
+<ul class="plain">
+<li>Drag your mp4 from the desktop and drop it <b>onto</b> the Movie File In node. The banana becomes your footage.</li>
+<li>If it did not take: open parameters (<kbd>p</kbd>) and click the <b>+</b> next to File to browse for it.</li>
+</ul>
+
+<h2><span class="stepno">05</span>Wire your first chain</h2>
+<ul class="plain">
+<li>Double-click empty space to the right of your movie node → TOP → <b>Level</b>. A new node appears.</li>
+<li>Every node has a small <b>output dot on its right edge</b> and an <b>input dot on its left edge</b>. Drag from the movie node's output to the Level node's input. A wire connects them: the image now flows through Level.</li>
+<li>Select Level, press <kbd>p</kbd>: drag <b>Brightness</b> and <b>Gamma</b> and watch the image respond. This is your exposure control.</li>
+<li>Add one more the same way: TOP → <b>HSV Adjust</b>, wired after Level. Drag <b>Saturation</b> and <b>Hue Offset</b>: this is your grade.</li>
+</ul>
+
+<h2><span class="stepno">06</span>See it big</h2>
+<ul class="plain">
+<li>Every node has a small circle in its bottom-right corner: the <b>display flag</b>. Click it on your HSV node: that node now fills the background of the network.</li>
+<li>Rule for the rest of the semester: the display flag shows you any point in the chain: click along the chain to see what each node contributes.</li>
+</ul>
+
+<h2><span class="stepno">07</span>Melt it: Displace</h2>
+<ul class="plain">
+<li>Add TOP → <b>Noise</b> (a moving grayscale cloud). In its parameters, set <b>Type</b> to Sparse, and under the Transform page, drag <b>Translate Z</b> slowly: the cloud drifts. Type a small expression later; dragging is enough today.</li>
+<li>Add TOP → <b>Displace</b>. It has <b>two</b> inputs on its left edge: wire your HSV node into the <b>top</b> input (the image) and the Noise into the <b>bottom</b> input (the force).</li>
+<li>Open Displace's parameters: drag <b>Displace Weight</b>. At 0.02 your footage swims; at 0.3 it dissolves. This node is Hydra's <code>modulate()</code> as a box.</li>
+</ul>
+
+<h2><span class="stepno">08</span>Trails: the feedback loop</h2>
+<ul class="plain">
+<li>Add TOP → <b>Feedback</b>, wired after Displace.</li>
+<li>Add TOP → <b>Transform</b>, wired after Feedback. In its parameters set <b>Scale</b> to 1.01 and <b>Rotate</b> to 0.2: tiny numbers, big consequences.</li>
+<li>Add TOP → <b>Composite</b>. Wire Transform into its top input, and your Displace node into its second input. In Composite's parameters set <b>Operation</b> to Over.</li>
+<li>Now close the loop: open the Feedback node's parameters. Find the <b>Target TOP</b> field: drag the Composite <b>node itself</b> from the network and drop it into that field.</li>
+<li>The image begins to trail and spiral: each frame remembers the last. Adjust the Transform's scale/rotate: the trail changes direction and speed.</li>
+</ul>
+
+<h2><span class="stepno">09</span>Render a video file</h2>
+<ul class="plain">
+<li>Add TOP → <b>Movie File Out</b>, wired after Composite.</li>
+<li>In its parameters: set <b>File</b> to where you want the video, and leave the codec at H.264 for tonight.</li>
+<li>Click the <b>Record</b> toggle On. Let the patch run 45-60 seconds. Click Record Off. Your file is on disk: watch it outside TD to confirm.</li>
+<li>For a still instead: right-click any node → <b>Save Image</b>.</li>
+</ul>
+
+<h2><span class="stepno">10</span>Where to go from here tonight</h2>
+<table>
+<tr><th>Swap in</th><th>Result</th></tr>
+<tr><td>Edge (before Composite)</td><td>Neon contour lines on the footage</td></tr>
+<tr><td>Blur → Threshold</td><td>Organic blobs from anything</td></tr>
+<tr><td>Monochrome → Lookup (wire a Ramp into input 2)</td><td>Duotone: luminance mapped to any two colors</td></tr>
+<tr><td>Cache (set Cache Size, drag Output Index)</td><td>Frame echo and stutter: time as material</td></tr>
+</table>
+<p>Same wiring moves you already know: add the node, connect output to input, press <kbd>p</kbd>, drag values, watch.</p>
+
+<div class="tip">Save as sketch_01.toe, then Save As sketch_02.toe when you branch. <kbd>ctrl</kbd>+<kbd>s</kbd> is a rhythm, not an event. And when a wire will not connect: you are probably dragging TOP into CHOP: families only wire to themselves (converters exist; later).</div>
+
+<div class="sketch">
+<div class="tag">Sketch 05 · TOPs</div>
+<p>Rebuild today's patch with your own footage, then change it: swap at least two nodes from the step 10 table and make the feedback loop your own. Render 45-60 seconds + a screenshot of your network.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+
+<!-- ============ DEMO 06 TD II ============ -->
+<section class="demo" id="d06">
+<div class="week">Demo 06</div>
+<h1>TouchDesigner II · CHOPs + Instancing</h1>
+<p class="lede">Session two, same method: one guided build, step by step. First we make a patch move by itself with CHOPs (boxes that carry numbers instead of images), then we turn one shape into a thousand with instancing, and finally we send TD's output into other software.</p>
+
+<h2><span class="stepno">01</span>Meet the CHOP family</h2>
+<ul class="plain">
+<li>Double-click empty space → the menu → <b>CHOP</b> tab. These nodes carry <b>channels</b>: numbers changing over time. Their viewers draw graphs instead of images.</li>
+<li>Add <b>LFO</b>. You see a wave scrolling: a number going up and down forever. In its parameters, set <b>Frequency</b> to 0.2: a slow breath.</li>
+</ul>
+
+<h2><span class="stepno">02</span>Make the number useful: Math</h2>
+<ul class="plain">
+<li>Add CHOP → <b>Math</b>, wire the LFO into it.</li>
+<li>In Math's parameters, open the <b>Range</b> page: set <b>From Range</b> −1 to 1, and <b>To Range</b> 0 to 360.</li>
+<li>The wave now travels 0→360: a rotation. Math is the translator between "a wave" and "a parameter's language": you will use it constantly.</li>
+</ul>
+
+<h2><span class="stepno">03</span>Wire the number to an image</h2>
+<ul class="plain">
+<li>Build a quick TOP chain beside it: <b>Movie File In</b> → <b>Transform</b> (drop your footage on the movie node like last week).</li>
+<li>On the Math CHOP, click the small <b>+</b> on its bottom-right to activate its viewer: you can now grab the channel.</li>
+<li>Drag the channel's <b>name</b> (chan1) out of the Math node and drop it exactly onto the <b>Rotate</b> field in the Transform's parameters. A menu pops: choose <b>Export CHOP</b>.</li>
+<li>The Rotate field turns <b>green</b>: it is now owned by the signal, and your footage rotates with the breath of the LFO. Green = alive. Right-click a green field → Delete Export to take it back.</li>
+</ul>
+
+<h2><span class="stepno">04</span>Five parameters breathing</h2>
+<ul class="plain">
+<li>Repeat the export move with new sources: an LFO at a different frequency onto the Transform's <b>Scale</b>; a CHOP → <b>Noise</b> onto a Displace Weight; a Noise onto HSV's Hue Offset.</li>
+<li>A patch where five parameters breathe at five different rates never repeats: that is your first genuinely generative TD piece. Add CHOP → <b>Lag</b> between any jittery source and its Math: it smooths the motion into something musical.</li>
+</ul>
+
+<h2><span class="stepno">05</span>Instancing: build the render rig</h2>
+<ul class="plain">
+<li>New area of the network. Double-click → <b>COMP</b> tab → add <b>Geometry</b>, <b>Camera</b>, and <b>Light</b>. Then → TOP tab → <b>Render</b>. These four are the standard 3D rig: Render draws what Camera sees.</li>
+<li>Wire nothing yet: Render finds them automatically if they sit in the same network. Click Render's display flag: you see a gray torus: the default shape inside Geometry.</li>
+</ul>
+
+<h2><span class="stepno">06</span>Give it a simpler shape</h2>
+<ul class="plain">
+<li>Scroll <b>into</b> the Geometry node (zoom in until you enter it, or select it and press <kbd>enter</kbd>): inside lives the torus.</li>
+<li>Delete it. Double-click → <b>SOP</b> tab → add <b>Sphere</b>. In its parameters set <b>Radius</b> to 0.05 0.05 0.05.</li>
+<li>On the Sphere node, turn on its <b>render + display flags</b> (the small blue and purple dots on the node's right edge).</li>
+<li>Press <kbd>u</kbd> to go back up. The Render TOP now shows one tiny sphere.</li>
+</ul>
+
+<h2><span class="stepno">07</span>One sphere becomes a thousand</h2>
+<ul class="plain">
+<li>Add CHOP → <b>Noise</b>. In its parameters, on the <b>Channel</b> page: set <b>Channel Names</b> to <code>tx ty tz</code> (three channels). On the Common page set <b>Start</b> 0, <b>End</b> 1000, so the noise is 1000 samples long: one sample per copy.</li>
+<li>Select the Geometry COMP, press <kbd>p</kbd>, open its <b>Instance</b> page: turn <b>Instancing</b> On.</li>
+<li>In <b>Instance CHOP</b>, drag your Noise CHOP into the field. Then set <b>Translate X</b> = tx, <b>Translate Y</b> = ty, <b>Translate Z</b> = tz (the menus next to each will list the channels).</li>
+<li>The Render TOP now shows a cloud of a thousand spheres, positioned by noise.</li>
+</ul>
+
+<h2><span class="stepno">08</span>Make the cloud live</h2>
+<ul class="plain">
+<li>On the Noise CHOP's Transform page, drag <b>Translate Z</b>: the entire cloud reorganizes itself smoothly. Export an LFO onto that parameter (the step 03 move) and the cloud breathes on its own.</li>
+<li>Composite the Render TOP over your footage chain from step 03: generated cloud + your image: the mixed media rule inside one patch.</li>
+</ul>
+
+<h2><span class="stepno">09</span>Send TD anywhere: Syphon / Spout</h2>
+<ul class="plain">
+<li>Add TOP → <b>Syphon Spout Out</b> (that one node handles Syphon on macOS and Spout on Windows), wired at the end of your chain.</li>
+<li>Your patch is now a live video source that other software can see: MadMapper, OBS, Resolume all list it as an input. This is how a TD patch reaches a projector rig, a stream, or another artist's machine (NDI In/Out TOPs do the same over the network).</li>
+</ul>
+
+<h2><span class="stepno">10</span>Show it properly</h2>
+<ul class="plain">
+<li>Press <kbd>F1</kbd>: Perform Mode: fullscreen output with the editor hidden. <kbd>esc</kbd> returns to the network. This is how TD pieces are actually shown, and how you record clean documentation of them.</li>
+<li>Keep an eye on the frame rate in the bottom bar: below 45, something is too heavy: usually a Blur at full resolution or a huge Noise. Lower the resolution on that node's Common page.</li>
+</ul>
+
+<div class="tip">The Palette (left sidebar) ships working components built by the community: audio analysis, mappers, tools. Dropping one in and reading how it is wired is a legitimate education.</div>
+
+<div class="sketch">
+<div class="tag">Sketch 06 · CHOPs + instancing</div>
+<p>A patch with at least four parameters driven by CHOPs (no hand animation) and one instanced element (500+ copies) positioned by a Noise or Pattern CHOP. Render 45-60 seconds in Perform Mode + a network screenshot.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+<!-- ============ DEMO 07 SOUND ============ -->
+<section class="demo" id="d07">
+<div class="week">Demo 07</div>
+<h1>Sound + Audio-Reactivity</h1>
+<p class="lede">Sound as material, then sound as signal: this demo wires audio into all three tools you now know: Hydra, p5, and TouchDesigner: the same idea three times: analyze the sound into numbers, map the numbers to visual properties, and mean it.</p>
+
+<div class="intro"><b>Some lore.</b> In 1940s Paris, Pierre Schaeffer started making music from recordings of trains and doors: musique concrète: the idea that any captured sound is material. Around the same time, animators like Norman McLaren drew directly onto the optical soundtrack of film strips: images that literally became sound. Audio-reactive visuals are the same marriage from the other direction: sound analyzed into numbers, numbers made visible.</div>
+<h2><span class="stepno">01</span>Capture and shape (quick, but not optional)</h2>
+<ul class="plain">
+<li>Get close: distance is the enemy, not the microphone. Phone recorders at 30 cm beat good mics at 3 m.</li>
+<li>Record 10 seconds of room tone wherever you record: it glues edits.</li>
+<li>Levels peak around −12 dB, never 0: clipping is unfixable, quiet is fixable.</li>
+<li>Edit in Audacity / Fairlight / Audition: fade every cut (even 5 ms), layer ambience under details, export WAV for work, normalize to −1 dB last.</li>
+</ul>
+
+<h2><span class="stepno">02</span>The two numbers every tool extracts</h2>
+<p><b>Amplitude</b>: how loud right now: one number: good for size, opacity, weight. <b>Spectrum (FFT)</b>: how loud per frequency band: an array: bass, mids, highs as separate signals. Every audio-reactive piece ever made maps these two onto visual properties: the craft is entirely in the mapping.</p>
+
+<h2><span class="stepno">03</span>Hydra hears</h2>
+<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
+<pre>a.show()                <span class="cm">// draw the fft bins at the bottom: your meter</span>
+a.setBins(4)            <span class="cm">// 4 bands: a.fft[0] bass → a.fft[3] highs</span>
+a.setSmooth(0.8)        <span class="cm">// ease the values: musical, not jittery</span>
+a.setScale(8)           <span class="cm">// sensitivity: lower = more reactive</span>
+
+osc(20, 0.05, 1.1)
+  .modulate(noise(3), () => a.fft[0] * 0.6)   <span class="cm">// bass melts the image</span>
+  .scale(() => 1 + a.fft[1] * 0.4)            <span class="cm">// mids swell it</span>
+  .saturate(() => 1 + a.fft[3] * 2)           <span class="cm">// highs flash the color</span>
+  .out()</pre></div>
+<p>Allow microphone access. Play your edited sound piece out loud and the mic hears it: or route system audio in with a loopback tool later. Every parameter that accepts <code>() =&gt;</code> can listen.</p>
+
+<h2><span class="stepno">04</span>p5 hears: amplitude</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre><span class="cm">// enable the p5.sound library in the editor (it is on by default)</span>
+let mic, amp
+function setup() {
+  createCanvas(600, 600)
+  mic = new p5.AudioIn()
+  mic.start()
+  amp = new p5.Amplitude()
+  amp.setInput(mic)
+}
+function draw() {
+  background(245)
+  let level = amp.getLevel()            <span class="cm">// 0.0 - 1.0</span>
+  let d = map(level, 0, 0.3, 20, 500)
+  fill(21); noStroke()
+  circle(width/2, height/2, d)
+}</pre></div>
+
+<h2><span class="stepno">05</span>p5 hears: spectrum</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>let mic, fft
+function setup() {
+  createCanvas(800, 400)
+  mic = new p5.AudioIn(); mic.start()
+  fft = new p5.FFT(0.85, 64)          <span class="cm">// smoothing, bins</span>
+  fft.setInput(mic)
+}
+function draw() {
+  background(245)
+  let spectrum = fft.analyze()
+  noStroke(); fill(21)
+  for (let i = 0; i &lt; spectrum.length; i++) {
+    let h = map(spectrum[i], 0, 255, 0, height)
+    rect(i * (width / spectrum.length), height - h,
+         width / spectrum.length - 2, h)
+  }
+  <span class="cm">// or named bands:</span>
+  let bass = fft.getEnergy("bass")     <span class="cm">// 0-255</span>
+  let treble = fft.getEnergy("treble")
+}</pre></div>
+<p>To react to a file instead of the mic: <code>loadSound('track.mp3')</code> in preload, <code>song.play()</code>, <code>fft.setInput(song)</code>. The bars are the hello-world: replace them with your grid from demo 03, your type, your footage's opacity.</p>
+
+<h2><span class="stepno">06</span>TouchDesigner hears</h2>
+<table>
+<tr><th>Do</th><th>Detail</th></tr>
+<tr><td>1</td><td><b>Audio Device In CHOP</b> (mic) or <b>Audio File In CHOP</b> (your piece)</td></tr>
+<tr><td>2</td><td>Split two ways: → <b>Analyze CHOP</b> (Function: RMS Power) for amplitude; → <b>Audio Spectrum CHOP</b> for FFT</td></tr>
+<tr><td>3</td><td>→ <b>Lag CHOP</b> (lag 0.1 / 0.3): raw audio is jitter; lag makes it musical</td></tr>
+<tr><td>4</td><td>→ <b>Math CHOP</b> to the target range → drag the channel onto any parameter → Export: the exact demo 06 move with the LFO swapped for sound</td></tr>
+<tr><td>5</td><td>Spectrum → instancing scale from demo 06: the classic dancing point-cloud in four wires</td></tr>
+</table>
+
+
+<div class="sketch">
+<div class="tag">Sketch 07 · Audio-reactive</div>
+<p>Record and design a 30-second sound piece (three layers minimum, one recorded by you). Then drive a visual with it in Hydra, p5, or TD: with a written one-line mapping statement. Submit sound file, recording of the reactive visual, and the statement.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+
+<!-- ============ DEMO 08 PROJECTION IN CODE ============ -->
+<section class="demo" id="d08">
+<div class="week">Demo 08</div>
+<h1>Projection + Mapping in Code</h1>
+<p class="lede">Taking your Hydra, p5, and TD work off the rectangle: with the tools themselves. Projector craft first, then corner-pin mapping in the browser and in TouchDesigner: no dedicated mapping software required (MadMapper exists and is great: but you should know how to do this with what you already write).</p>
+
+<div class="intro"><b>Some lore.</b> Projection has been escaping the cinema for a century: from son et lumière shows on French monuments, to Expanded Cinema in the 1960s, to the Sandin generation projecting live-processed video in lofts. What used to need a truck of equipment is now your laptop, a projector, and a browser tab: which means the interesting problem is no longer technical: it is choosing a surface that means something.</div>
+<h2><span class="stepno">01</span>Projector craft</h2>
+<table>
+<tr><th>Term</th><th>What it means for you</th></tr>
+<tr><td>Lumens</td><td>Dark room: 2500+ works. Lit room: 4000+ or accept a ghost</td></tr>
+<tr><td>Throw ratio</td><td>Distance ÷ image width: short-throw (&lt;1) for tabletops and tight rooms</td></tr>
+<tr><td>Keystone</td><td>Refuse the projector's digital keystone: it burns resolution: fix geometry in software instead</td></tr>
+<tr><td>Surface</td><td>Pale + matte projects best. Test the real material early: fabric, paper, plaster, objects all behave differently</td></tr>
+<tr><td>Black</td><td>A projector's black is the room's light. Control the room: darkness sells the illusion</td></tr>
+</table>
+
+<h2><span class="stepno">02</span>Fullscreen is already projection</h2>
+<p>Connect the projector as a second display, drag the browser there, fullscreen it (<kbd>F11</kbd> / <kbd>ctrl</kbd>+<kbd>cmd</kbd>+<kbd>f</kbd>). Hydra fullscreen on a wall is a finished installation move: set <code>setResolution(1920, 1080)</code> to match. In p5: <code>createCanvas(windowWidth, windowHeight)</code> plus <code>fullscreen(true)</code> on a key press. Flat-wall pieces need nothing more; mapping starts when the surface stops being flat.</p>
+
+<h2><span class="stepno">03</span>Corner-pin in the browser: Maptastic, full walkthrough</h2>
+<p>Maptastic is a tiny script that lets you grab the corners of anything on a web page and drag them to fit a physical surface. To use it with p5, you need to touch the sketch's HTML file once. Do not panic: here is the one thing to know about HTML: your p5 sketch actually lives inside a small web page, and that page is a file called <b>index.html</b>. It loads the p5 library, then loads your <b>sketch.js</b>. You never need to write HTML: you only need to paste one line into that file.</p>
+<ul class="plain">
+<li><b>1.</b> In the p5 web editor, look at the file bar above the code (where it says sketch.js). Click the small <b>&gt;</b> arrow on the left: the file list opens: you will see <b>index.html</b>, style.css, sketch.js.</li>
+<li><b>2.</b> Click <b>index.html</b>. You are looking at the page that hosts your sketch. Find the lines that start with <code>&lt;script src=</code>: those load libraries.</li>
+<li><b>3.</b> Paste this line directly <b>below</b> the existing script lines (and above <code>&lt;/head&gt;</code>):</li>
+</ul>
+<div class="code"><div class="bar"><span>index.html · add one line</span><button data-copy>copy</button></div>
+<pre>&lt;script src="https://cdn.jsdelivr.net/gh/glowbox/maptasticjs/build/maptastic.min.js"&gt;&lt;/script&gt;</pre></div>
+<ul class="plain">
+<li><b>4.</b> Back in <b>sketch.js</b>, give your canvas a name and hand it to Maptastic:</li>
+</ul>
+<div class="code"><div class="bar"><span>sketch.js</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  let c = createCanvas(1280, 720)
+  c.id('stage')                    <span class="cm">// names the canvas so Maptastic can find it</span>
+  new Maptastic('stage')           <span class="cm">// that's the whole integration</span>
+}
+
+function draw() {
+  background(21)
+  fill(245); noStroke()
+  circle(width/2, height/2, 200 + sin(frameCount * 0.05) * 80)
+}</pre></div>
+<ul class="plain">
+<li><b>5.</b> Run the sketch, then open it fullscreen on the projector (the editor's full-page view, or File → Share → Fullscreen link, opened on the projector display).</li>
+<li><b>6.</b> Press <kbd>shift</kbd>+<kbd>space</kbd>: Maptastic's edit mode turns on. Drag each corner of your canvas until the image sits exactly on the physical face you are hitting. <kbd>shift</kbd>+<kbd>space</kbd> again to exit.</li>
+<li><b>7.</b> The corner layout saves itself in the browser (it survives reloads on the same machine). Re-rig the projector and you re-drag: which is why you tape the projector's floor position.</li>
+<li><b>8.</b> Multiple surfaces: create more than one canvas or element, give each its own id, and pass them all: <code>new Maptastic('stage1', 'stage2')</code>: three canvases can wrap a box.</li>
+</ul>
+<p class="note">Same trick works beyond p5: any element with an id (a &lt;video&gt; tag, a Hydra canvas embedded in your own page) can be Maptastic'd. For Hydra specifically, the quickest classroom route is: run Hydra fullscreen for flat surfaces, or capture it into TD (demo 06's Syphon/OBS bridge) and map there.</p>
+<h2><span class="stepno">04</span>Warping inside p5 (WEBGL)</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>let pg
+function setup() {
+  createCanvas(1280, 720, WEBGL)
+  pg = createGraphics(640, 360)          <span class="cm">// draw your piece here</span>
+}
+function draw() {
+  pg.background(245)
+  pg.fill(21); pg.circle(pg.width/2, pg.height/2, 100 + sin(frameCount*0.05)*60)
+
+  background(0)
+  texture(pg)
+  noStroke()
+  beginShape()                            <span class="cm">// a quad you can distort:</span>
+  vertex(-500, -250, 0, 0)                <span class="cm">// x, y, u, v: move the corners</span>
+  vertex(420, -320, pg.width, 0)
+  vertex(460, 300, pg.width, pg.height)
+  vertex(-460, 260, 0, pg.height)
+  endShape(CLOSE)
+}</pre></div>
+<p>The sketch renders into an offscreen buffer, then paints it onto a quad whose corners you place: mapping as geometry you own. Wire the corner values to key presses and you calibrate live in the space.</p>
+
+<h2><span class="stepno">05</span>TouchDesigner: the mapping toolkit</h2>
+<table>
+<tr><th>Do</th><th>Detail</th></tr>
+<tr><td>Quick</td><td><b>Corner Pin TOP</b> at the end of any chain: drag the four corners: one surface mapped in one node</td></tr>
+<tr><td>Multi-surface</td><td>Palette → Mapping → <b>kantanMapper</b>: draw quads and freeform shapes, assign a TOP to each, mask with bezier edges: MadMapper's core inside TD</td></tr>
+<tr><td>Output</td><td><b>Window COMP</b>: fullscreen on the projector display; or Syphon/Spout Out into other software if the venue demands it</td></tr>
+<tr><td>Edges</td><td>A soft-edged Ramp TOP multiplied over the output feathers spill: cheap, effective</td></tr>
+</table>
+
+<h2><span class="stepno">06</span>The rig is part of the piece</h2>
+<ul class="plain">
+<li>Draw the rig before you build: projector position, throw distance, power run, playback machine: one diagram.</li>
+<li>Tape the projector's floor position and mark focus/zoom: re-rigging without marks costs an hour every session.</li>
+<li>Content designed for the surface beats content stretched onto it: block out the geometry first, then make the work inside it.</li>
+<li>Test in the actual space, in the actual darkness, earlier than feels necessary: the desk version always lies.</li>
+</ul>
+
+<div class="tip">Route Hydra or p5 into TD (demo 06's Syphon/OBS bridge) and map them with kantanMapper: the whole toolchain becomes one instrument pointed at a wall.</div>
+
+<div class="sketch">
+<div class="tag">Sketch 08 · Mapped</div>
+<p>Map live-coded or patched content (Hydra, p5, or TD: no pre-rendered video) onto a physical object or corner: not a flat wall: using any technique from today. Submit 45-60 seconds of documentation shot in the dark space + one photo of the rig + which technique you used.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+<!-- ============ DEMO 09 SENSORS ============ -->
+<section class="demo" id="d09">
+<div class="week">Demo 09</div>
+<h1>Sensors + Inputs</h1>
+<p class="lede">The pattern for the whole demo is one sentence: sensor in, value out, visual responds. An ESP32 reads the world (touch, force, distance), sends numbers to your laptop, and any tool you now know reacts. No electronics background assumed: setup is spelled out below, every wire named.</p>
+<div class="intro"><b>Some lore.</b> The first electronic instrument you played without touching was the theremin, 1920: your hand in the air changed a field, and the field changed the sound. Physical computing is that idea made cheap: a microcontroller board that once cost a research lab now costs less than lunch, and the tradition built around it (Arduino, and a generation of art-school pieces that notice their audience) is exactly what we join today.</div>
+
+<h2><span class="stepno">01</span>The kit</h2>
+<table>
+<tr><th>Part</th><th>Job</th></tr>
+<tr><td>ESP32 dev board</td><td>The brain: reads sensors, talks over USB or Wi-Fi</td></tr>
+<tr><td>USB data cable</td><td>Board to laptop. Must be a data cable: many phone-charger cables carry only power and will drive you insane</td></tr>
+<tr><td>HC-SR04</td><td>Ultrasonic distance: presence and proximity, 2 cm - 4 m</td></tr>
+<tr><td>FSR</td><td>Force-sensitive resistor: pressure and touch weight</td></tr>
+<tr><td>Copper tape + wire</td><td>Capacitive touch: any conductive surface becomes a button (ESP32 has touch pins built in)</td></tr>
+<tr><td>Breadboard + jumper wires + one 10 kΩ resistor</td><td>No soldering this week</td></tr>
+</table>
+
+<h2><span class="stepno">02</span>How a breadboard works (30 seconds)</h2>
+<ul class="plain">
+<li>The two long rails down each side (marked + and −) are each one connected strip: power highways.</li>
+<li>Every short row of 5 holes in the middle is connected <b>across</b>, interrupted by the center trench.</li>
+<li>So: push the ESP32 across the trench, feed the + rail from its 3.3V pin and the − rail from GND, and any sensor leg pushed into the same 5-hole row as a jumper wire is connected to it. That is the entire theory.</li>
+</ul>
+
+<h2><span class="stepno">03</span>Software setup, exactly</h2>
+<ul class="plain">
+<li><b>1.</b> Download the <b>Arduino IDE</b> from <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">arduino.cc/en/software</a> and install it. This is where you write and upload code to the board.</li>
+<li><b>2.</b> Open it → <b>Tools → Board → Boards Manager</b> → search <b>esp32</b> → install "esp32 by Espressif Systems" (takes a few minutes).</li>
+<li><b>3.</b> Plug the ESP32 into your laptop with the USB cable.</li>
+<li><b>4.</b> Tools → Board → esp32 → choose <b>ESP32 Dev Module</b>. Then Tools → <b>Port</b> → pick the new port that appeared when you plugged in (Windows: COM3/COM4...; macOS: /dev/cu.usbserial-...).</li>
+<li><b>5.</b> If no port appears: you need the USB driver (CP210x or CH340 depending on the board: search the exact name printed on the board's USB chip, install, replug). This is the single genuinely annoying step; we do it together in class.</li>
+<li><b>6.</b> The IDE window is your sketch. The <b>✓</b> button checks the code; the <b>→</b> button uploads it to the board. After upload, the board runs the code forever, even without the IDE open.</li>
+<li><b>7.</b> The <b>Serial Monitor</b> (magnifying-glass icon, top right) is the window where the board's numbers appear: set its baud rate to <b>115200</b> (bottom-right dropdown) to match our code.</li>
+</ul>
+
+<h2><span class="stepno">04</span>First signal: a touch pin (no breadboard needed)</h2>
+<ul class="plain">
+<li>Wiring: clip one jumper wire into the pin labeled <b>4</b> (GPIO4 = touch pin T0). Tape the other end to a strip of copper tape on the table. Done: one wire.</li>
+<li>In the Arduino IDE, paste this, press <b>→</b> to upload, then open the Serial Monitor:</li>
+</ul>
+<div class="code"><div class="bar"><span>arduino / esp32</span><button data-copy>copy</button></div>
+<pre>void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int v = touchRead(T0);   <span class="cm">// GPIO4: the wire + copper tape</span>
+  Serial.println(v);
+  delay(30);
+}</pre></div>
+<p>Numbers stream. Touch the copper: the number drops. That falling number is your entire interface.</p>
+
+<h2><span class="stepno">05</span>Distance with the HC-SR04</h2>
+<ul class="plain">
+<li>Wiring, four jumpers from the sensor's four pins: <b>VCC → 5V</b> pin on the ESP32 (labeled 5V or VIN), <b>GND → GND</b>, <b>TRIG → pin 5</b>, <b>ECHO → pin 18</b>. Push the sensor into the breadboard facing outward so it can "see."</li>
+</ul>
+<div class="code"><div class="bar"><span>arduino / esp32</span><button data-copy>copy</button></div>
+<pre>const int TRIG = 5, ECHO = 18;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+}
+
+void loop() {
+  digitalWrite(TRIG, LOW);  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH); delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  long d = pulseIn(ECHO, HIGH);
+  float cm = d * 0.0343 / 2.0;
+  Serial.println(cm);
+  delay(50);
+}</pre></div>
+<p>Upload, open Serial Monitor, wave your hand: centimeters stream out.</p>
+
+<h2><span class="stepno">06</span>Pressure with the FSR</h2>
+<ul class="plain">
+<li>Wiring: one FSR leg into a breadboard row fed by <b>3.3V</b>. The other leg into a new row; from that same row, one jumper to <b>pin 34</b> and the <b>10 kΩ resistor</b> to the − rail (GND). This resistor pair is called a voltage divider: it turns squeeze into a readable voltage.</li>
+<li>Code: replace the loop with <code>Serial.println(analogRead(34));</code> (keep <code>Serial.begin(115200);</code> in setup). Press the FSR: the number climbs.</li>
+</ul>
+
+<h2><span class="stepno">07</span>Into p5 with WebSerial</h2>
+<ul class="plain">
+<li>In the p5 web editor, open the file list (the <b>&gt;</b> arrow, same move as the Maptastic demo) → <b>index.html</b> → paste this line below the other script lines:</li>
+</ul>
+<div class="code"><div class="bar"><span>index.html · add one line</span><button data-copy>copy</button></div>
+<pre>&lt;script src="https://unpkg.com/@gohai/p5.webserial@^1/libraries/p5.webserial.js"&gt;&lt;/script&gt;</pre></div>
+<div class="code"><div class="bar"><span>p5.js · sketch.js</span><button data-copy>copy</button></div>
+<pre>let port, val = 0
+
+function setup() {
+  createCanvas(600, 600)
+  port = createSerial()
+}
+
+function draw() {
+  if (port.opened()) {
+    let s = port.readUntil('\\n')
+    if (s.length &gt; 0) val = float(s)
+  }
+  background(245)
+  fill(21); noStroke()
+  circle(width/2, height/2, map(val, 0, 200, 400, 20))
+}
+
+function mousePressed() {
+  if (!port.opened()) port.open(115200)  <span class="cm">// click the canvas, pick the ESP32 port</span>
+}</pre></div>
+<ul class="plain">
+<li>Use Chrome (WebSerial is Chrome-only), and <b>close the Arduino Serial Monitor first</b>: only one program can hold the port at a time.</li>
+<li>Click the canvas, choose the ESP32's port in the popup: your hand's distance now scales the circle. Swap the circle for anything from demos 01-08.</li>
+</ul>
+
+<h2><span class="stepno">08</span>OSC over Wi-Fi to TouchDesigner</h2>
+<p>For installations, skip the USB cable: the ESP32 joins the Wi-Fi and sends OSC messages (Arduino IDE → Library Manager → install <b>ArduinoOSC</b>: its examples show the ten lines: your Wi-Fi name, password, the laptop's IP, and a message like <code>/sensor/distance</code> with the value). In TD: add an <b>OSC In CHOP</b>, set the port to match (8000), and the value appears as a channel: → Lag → Math → drag onto any parameter → Export: the exact demo 06 move with the LFO swapped for the world. A mapped surface from demo 08 plus a presence sensor is a piece that notices its audience.</p>
+
+<h2><span class="stepno">09</span>Smooth it</h2>
+<p>Sensor values are noisy. Smooth in software: <code>val = lerp(val, newVal, 0.1)</code> in p5, a Lag CHOP in TD. Raw sensor data always looks broken; smoothed data looks intentional.</p>
+
+<div class="sketch">
+<div class="tag">Sketch 09 · Sensors</div>
+<p>One sensor driving one visual property of any earlier sketch. Video with hand and screen in one frame so the causality is visible.</p>
+<p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
+</div>
+</section>
+</main>
+<script>
+// ---------- navigation ----------
+const links = document.querySelectorAll('#navlist a');
+const secs = document.querySelectorAll('section.demo');
+function show(id){
+  secs.forEach(s => s.classList.toggle('on', s.id === id));
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+  document.getElementById('nav').classList.remove('open');
+  window.scrollTo({top:0});
+}
+function route(){
+  const id = location.hash ? location.hash.slice(1) : 'd01';
+  show(document.getElementById(id) ? id : 'd01');
+}
+window.addEventListener('hashchange', route);
+route();
+
+// ---------- mobile menu ----------
+document.getElementById('menu').addEventListener('click', () => {
+  document.getElementById('nav').classList.toggle('open');
+});
+
+// ---------- copy buttons ----------
+document.querySelectorAll('button[data-copy]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pre = btn.closest('.code').querySelector('pre');
+    navigator.clipboard.writeText(pre.innerText).then(() => {
+      btn.textContent = 'copied';
+      setTimeout(() => btn.textContent = 'copy', 1200);
+    });
+  });
+});
+
+
+// ---------- runnable hydra patches ----------
+document.querySelectorAll('.run[data-hydra]').forEach(box => {
+  const btn = box.querySelector('button.go');
+  btn.addEventListener('click', () => {
+    const stage = box.querySelector('.stage');
+    if (stage.querySelector('iframe')) { stage.innerHTML = ''; btn.textContent = 'run this patch'; return; }
+    const code = box.dataset.hydra;
+    const doc = '<!DOCTYPE html><html><head><scr' + 'ipt src="https://unpkg.com/hydra-synth"></scr' + 'ipt><style>body{margin:0;font:11px monospace;color:#888}canvas{display:block}<\/style></head><body><canvas id="hc" width="360" height="240"></canvas><div id="msg"></div><scr' + 'ipt>var tries=0;var t=setInterval(function(){tries++;if(typeof Hydra!=="undefined"){clearInterval(t);new Hydra({canvas:document.getElementById("hc"),detectAudio:false});' + code + '}else if(tries>50){clearInterval(t);document.getElementById("msg").textContent="hydra library could not load: check your connection"}},100)<\/scr' + 'ipt></body></html>';
+    const f = document.createElement('iframe');
+    f.width = 362; f.height = 242; f.setAttribute('title','hydra patch');
+    f.srcdoc = doc;
+    stage.appendChild(f);
+    btn.textContent = 'stop';
+  });
+});
+
+// ---------- runnable p5 sketches ----------
+document.querySelectorAll('.run[data-sketch]').forEach(box => {
+  const btn = box.querySelector('button.go');
+  btn.addEventListener('click', () => {
+    const stage = box.querySelector('.stage');
+    if (stage.querySelector('iframe')) { stage.innerHTML = ''; btn.textContent = 'run this sketch'; return; }
+    const code = box.dataset.sketch;
+    const doc = '<!DOCTYPE html><html><head><scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></scr' + 'ipt><style>body{margin:0;display:flex}<\/style></head><body><scr' + 'ipt>' + code + '<\/scr' + 'ipt></body></html>';
+    const f = document.createElement('iframe');
+    f.width = 362; f.height = 242; f.setAttribute('title','p5 sketch');
+    f.srcdoc = doc;
+    stage.appendChild(f);
+    btn.textContent = 'stop';
+  });
+});
+
+// ---------- signal trail cursor ----------
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;  // no trail on touch
+  const cv = document.createElement('canvas');
+  cv.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:999';
+  document.body.appendChild(cv);
+  const st = document.createElement('style');
+  st.textContent = '*{cursor:none !important}';
+  document.head.appendChild(st);
+  const cx = cv.getContext('2d');
+  const palette = ['229,35,27', '21,21,19', '0,90,220', '0,140,90', '230,140,0'];
+  let ci = 0;              // current color index
+  let down = false;        // mouse held?
+  let pts = [];
+  function size(){ cv.width = innerWidth; cv.height = innerHeight; }
+  size(); addEventListener('resize', size);
+  addEventListener('mousemove', e => {
+    pts.push({x: e.clientX, y: e.clientY, t: performance.now(), c: ci, w: down ? 4 : 1.5});
+  });
+  addEventListener('mousedown', () => { ci = (ci + 1) % palette.length; down = true; });
+  addEventListener('mouseup', () => { down = false; });
+  (function loop(){
+    const now = performance.now();
+    pts = pts.filter(p => now - p.t < 500);          // half-second memory
+    cx.clearRect(0, 0, cv.width, cv.height);
+    if (pts.length > 1) {
+      for (let i = 1; i < pts.length; i++) {
+        const a = (1 - (now - pts[i].t) / 500);       // fade with age
+        cx.strokeStyle = 'rgba(' + palette[pts[i].c] + ',' + (a * 0.6) + ')';
+        cx.lineWidth = pts[i].w;
+        cx.lineCap = 'round';
+        cx.beginPath();
+        cx.moveTo(pts[i-1].x, pts[i-1].y);
+        cx.lineTo(pts[i].x, pts[i].y);
+        cx.stroke();
+      }
+      const h = pts[pts.length - 1];
+      cx.strokeStyle = 'rgba(' + palette[h.c] + ',0.9)';
+      cx.lineWidth = 1;
+      cx.beginPath();
+      cx.moveTo(h.x - 6, h.y); cx.lineTo(h.x + 6, h.y);
+      cx.moveTo(h.x, h.y - 6); cx.lineTo(h.x, h.y + 6);
+      cx.stroke();
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
