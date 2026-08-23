@@ -62,12 +62,21 @@ ul.plain li{margin-bottom:6px;max-width:62ch}
   border-radius:2px;padding:2px 10px;cursor:pointer;color:var(--ink)}
 .code button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .cm{color:#7a7a72}
-.run{margin:0 0 18px}
-.run button.go{font-family:var(--mono);font-size:11px;border:1px solid var(--ink);background:var(--ink);
-  color:var(--paper);padding:5px 16px;border-radius:2px;cursor:pointer}
+.run{margin:14px 0 20px;border:1px solid var(--line);border-radius:3px;background:var(--panel);overflow:hidden}
+.run .editor{display:block;width:100%;border:0;background:transparent;resize:vertical;
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--ink);
+  padding:14px 16px;outline:none;tab-size:2}
+.run .runbar{display:flex;align-items:center;gap:8px;padding:7px 12px;border-top:1px solid var(--line)}
+.run button.go{font-family:var(--mono);font-size:10.5px;border:1px solid var(--ink);background:var(--ink);
+  color:var(--paper);padding:3px 16px;border-radius:2px;cursor:pointer}
 .run button.go:hover{background:var(--rec);border-color:var(--rec)}
-.run .stage{margin-top:10px}
-.run iframe{border:1px solid var(--line);border-radius:3px;background:#fff}
+.run button.reset{font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);background:none;
+  color:var(--ink);padding:3px 12px;border-radius:2px;cursor:pointer}
+.run button.reset:hover{border-color:var(--ink)}
+.run .hint{font-size:10px;color:var(--mute);margin-left:auto}
+.run .stage{padding:12px 16px 16px;background:var(--paper);border-top:1px solid var(--line)}
+.run .stage:empty{display:none}
+.run iframe{border:1px solid var(--line);border-radius:3px;background:#fff;display:block}
 table{border-collapse:collapse;width:100%;margin:14px 0 18px;font-size:12.5px}
 th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);
   border-bottom:1px solid var(--ink);padding:6px 10px 6px 0}
@@ -106,6 +115,8 @@ ul.res li::before{content:"→";position:absolute;left:0;color:var(--mute)}
   <div class="course">FMD 450</div>
   <div class="coursesub">Advanced Techniques in Multimedia Design<br>Fall 2026 · Mon + Wed<br>Mahmoud Hamdy</div>
   <ul id="navlist">
+    <li><a href="#d00"><span class="n">00</span>Start Here<span class="rec"></span></a></li>
+    <li><a href="#tools"><span class="n">··</span>Tools<span class="rec"></span></a></li>
     <li><a href="#d01"><span class="n">01</span>Hydra I · Signals<span class="rec"></span></a></li>
     <li><a href="#d02"><span class="n">02</span>Hydra II · Systems<span class="rec"></span></a></li>
     <li><a href="#d03"><span class="n">03</span>p5.js<span class="rec"></span></a></li>
@@ -120,6 +131,141 @@ ul.res li::before{content:"→";position:absolute;left:0;color:var(--mute)}
   <div class="foot"><b>Credits.</b> This site teaches with tools made by others: <a href="https://ojack.xyz" target="_blank" rel="noopener">Hydra by Olivia Jack</a> · <a href="https://p5js.org" target="_blank" rel="noopener">p5.js by the Processing Foundation</a> (created by Lauren McCarthy; Processing by Casey Reas + Ben Fry) · <a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE by Ted Davis</a> · <a href="https://derivative.ca" target="_blank" rel="noopener">TouchDesigner by Derivative</a> · <a href="https://github.com/glowbox/maptasticjs" target="_blank" rel="noopener">Maptastic by Glowbox</a> · <a href="https://github.com/gohai/p5.webserial" target="_blank" rel="noopener">p5.webserial by Gottfried Haider</a>. Type: JetBrains Mono (JetBrains) + Archivo (Omnibus-Type), both under the SIL Open Font License, served via Google Fonts. Course materials by Mahmoud Hamdy, FMD 450, for educational use.</div>
 </nav>
 <main>
+<!-- ============ 00 START HERE ============ -->
+<section class="demo" id="d00">
+<div class="week">First class</div>
+<h1>Start Here</h1>
+<p class="lede">What this course is, how it runs, and what you leave with. This page stays up all semester, so use it to check where we are, what is due, and what tool comes next.</p>
+
+<h2><span class="stepno">01</span>Today</h2>
+<ul class="plain">
+<li><b>Portfolio presentations.</b> Everyone shows what they have made so far, five minutes each, informally. I am looking for what kind of work is already there and what is missing, and I want to hear what you actually want to be making: the formats, the subjects, the things you have never had an excuse to try. That shapes how I pitch the demos, and it is how you find out who in the room is good at the thing you are stuck on.</li>
+<li><b>A bit about me and my work,</b> what I make and how I work.</li>
+<li><b>How the course runs,</b> which is everything below.</li>
+</ul>
+
+<h2><span class="stepno">02</span>What this course is</h2>
+<p>It is two things at once. It is a course in advanced multimedia techniques: real-time and generative tools, sound, projection, sensors, and the workflows around them. It is also a portfolio course: by the end of the semester you will have a body of documented work and a live portfolio to put it in.</p>
+<p>So treat the weekly sketches accordingly. They are small and meant to be fast, but a sketch you would happily show someone takes about the same evening as a sketch you would not. Push each one a little further than the brief asks, and make them varied: you want a portfolio with range in it, not twelve versions of the same instinct. By November you should be choosing which pieces to include rather than hunting for three that are presentable.</p>
+
+<h2><span class="stepno">03</span>This course and FMD 404</h2>
+<p>You are all in both, back to back, and they are built to work together. The tools you learn here are the tools your 404 projects will need, usually about a week before you need them. What is different is what each course asks of you: 404 is the studio, where the work is conceptual, developed over weeks, and reviewed as finished projects. This is the lab, where you learn techniques fast, in small pieces, weekly.</p>
+<p>Material moves freely between them. Your 404 footage is fair game for a sketch here, and a technique from a sketch here belongs in your studio work. The only rule is that a thing submitted for a grade in one course is not submitted for a grade in the other: here I am grading the technique and its documentation, in 404 the project itself.</p>
+
+<h2><span class="stepno">04</span>This course is also yours</h2>
+<p>The demo list is a starting point, not a fixed menu. If there is a technique you want to learn, tell me and we will try to fit it in, even if it is something I cannot do myself. I have people around me who can, and bringing someone in for a workshop is easier than you would think.</p>
+<p>There are things I left out only because I assumed nobody would want them. Building music with code is one, using something like Strudel. Hacking output devices is another: thermal and label printers, receipt printers, plotters, dot matrix printers, e-ink displays, old CRTs, anything with a screen or a print head can usually be driven from code. Then there is 3D, AR, machine vision, generative type systems, robotics. Say it out loud and it can happen.</p>
+
+<h2><span class="stepno">05</span>How the semester runs</h2>
+<ul class="plain">
+<li><b>One demo per session.</b> Each demo introduces a tool or a technique, step by step, and each one has its own page on this site with the full walkthrough and the code.</li>
+<li><b>One sketch per demo,</b> due the following Monday, posted to the class Google Drive before class.</li>
+<li><b>We look at them together</b> at the start of the next session. Short, informal, everyone sees everyone's work.</li>
+<li><b>Sketches are small,</b> about one honest evening of work each. They are graded on effort and intention rather than polish, but see the note above about intention.</li>
+<li><b>The final stretch</b> turns the semester's work into documentation and a published portfolio.</li>
+</ul>
+
+<h2><span class="stepno">06</span>How to use this site</h2>
+<p>Every demo lives here permanently: steps, code you can copy, and the sketch brief with its deadline. Nothing disappears after class, so if you miss a session or forget how something worked, start here. Some pages have live examples you can run in the browser.</p>
+<p>The Tools page is a running list of things worth knowing about: web toys, generators, utilities, and the software we use. Bring me things that belong on it.</p>
+
+<h2><span class="stepno">07</span>What I expect</h2>
+<ul class="plain">
+<li><b>Show up with the sketch made.</b> Missing one is survivable, missing three is a different conversation.</li>
+<li><b>Break things,</b> since a sketch that failed interestingly is worth more here than a safe one that worked.</li>
+<li><b>Ask early.</b> Two hours stuck alone on an install error is two hours you did not spend making something. Message me, search the forums, read the docs, ask the community. Worst case, ask an AI, but source it and make sure you understand what it hands back before you use it. Code you cannot explain is code that will break in front of an audience.</li>
+<li><b>Credit what you borrow.</b> If you build on someone's patch, tutorial or code, say so. That is normal practice, and it is only a problem when it is hidden.</li>
+<li><b>Copy and paste is fine.</b> Creative coding runs on borrowed code, and every community you will use publishes its examples for exactly this reason. Three conditions: credit the source, understand what every line is doing, and treat it as a starting point rather than the finished thing. Pasted code that you then bent into something of your own is the whole method. Pasted code you cannot explain is a problem waiting for a crit.</li>
+<li><b>Back up your work.</b> Browser-based tools store sketches locally, which means one cleared cache can erase a month. Export regularly.</li>
+</ul>
+
+<h2><span class="stepno">08</span>What you need</h2>
+<ul class="plain">
+<li>A laptop you can install software on, and a phone camera, which is genuinely the baseline.</li>
+<li>Free accounts: p5.js web editor, GitHub (later, for publishing).</li>
+<li>Free software, installed as we reach it: TouchDesigner (non-commercial licence), Arduino IDE.</li>
+<li>Optional and useful later: an external drive or cloud storage for footage, headphones, and a cheap ESP32 kit if you want to work with sensors.</li>
+</ul>
+
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section class="demo" id="tools">
+<div class="week">Reference</div>
+<h1>Tools</h1>
+<p class="lede">A running list: the software we use, browser toys worth an afternoon, and utilities that save hours. Not a lesson, just a shelf. Bring me things to add.</p>
+
+<h2><span class="stepno">01</span>What we use in class</h2>
+<ul class="res">
+<li><a href="https://hydra.ojack.xyz" target="_blank" rel="noopener">Hydra</a> · live-coded video synthesis in the browser. Nothing to install, sketches save into the URL.</li>
+<li><a href="https://editor.p5js.org" target="_blank" rel="noopener">p5.js web editor</a> · code sketches for drawing, animation and interaction. Make an account so your work saves.</li>
+<li><a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE</a> · p5 for live coding: recompiles as you type, with collaborative rooms.</li>
+<li><a href="https://derivative.ca" target="_blank" rel="noopener">TouchDesigner</a> · node-based real-time visuals. Free non-commercial licence covers everything we do.</li>
+<li><a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">Arduino IDE</a> · where you write and upload code to the ESP32 for sensor work.</li>
+<li><a href="https://www.audacityteam.org" target="_blank" rel="noopener">Audacity</a> · free audio recording and editing. Enough for everything sound-related in this course.</li>
+<li><a href="https://obsproject.com" target="_blank" rel="noopener">OBS Studio</a> · free screen recording and streaming. The reliable way to capture your sketches.</li>
+<li><a href="https://www.framer.com" target="_blank" rel="noopener">Framer</a> · design and publish a real website without writing code. Your portfolio lives here.</li>
+</ul>
+
+<h2><span class="stepno">02</span>Type toys</h2>
+<ul class="res">
+<li><a href="https://enfont-terrible.com/" target="_blank" rel="noopener">enFont Terrible</a> · Javier Arce's "terrible type foundry": drop in a font file, drag sliders to deform it, download the mutant as a working OTF. Check the original font's licence before you wreck it.</li>
+<li><a href="https://tools.joaogeneroso.com/lattice/" target="_blank" rel="noopener">Lattice</a> · João Generoso's grid animator: build type and shapes on a grid, set keyframes with easing, export PNG or MP4. A very fast route to a loop.</li>
+<li><a href="https://jake-welch-design.github.io/Glitch_type_generator_tool/" target="_blank" rel="noopener">Glitch Type Generator</a> · Jake Welch's browser tool for breaking, shifting and corrupting letterforms.</li>
+<li><a href="https://lauraketting.nl/project/touch-me/" target="_blank" rel="noopener">Touch Me</a> · Laura Ketting's experimental type project: letterforms that respond to being touched. Worth studying as a reference for interactive typography, not just as a toy.</li>
+</ul>
+
+<h2><span class="stepno">03</span>Image and pattern toys</h2>
+<ul class="res">
+<li><a href="https://textmode.art/" target="_blank" rel="noopener">textmode.art</a> · make images out of characters: ASCII and text-mode image making in the browser.</li>
+<li><a href="https://play.ertdfgcvb.xyz/#/src/demos/doom_flame_full_color" target="_blank" rel="noopener">play.ertdfgcvb.xyz</a> · Andreas Gysin's text-mode playground: animations built entirely from characters, with all the code visible and editable. Start on the doom flame, then work through the demo list.</li>
+<li><a href="https://antlii.work/" target="_blank" rel="noopener">antlii</a> · a set of experimental web tools for making and breaking images.</li>
+<li><a href="https://www.karlsims.com/rdtool.html" target="_blank" rel="noopener">Reaction-Diffusion</a> · Karl Sims' simulation of two chemicals fighting: grows organic, coral-like patterns from a few sliders.</li>
+<li><a href="https://grainrad.com/" target="_blank" rel="noopener">Grainrad</a> · drop in an image or video and run it through ASCII, dithering, halftone, pixel sort, VHS and more, live in the browser. Exports PNG, GIF, MP4 and SVG.</li>
+<li><a href="https://artkit.cc/" target="_blank" rel="noopener">Artkit</a> · a set of browser tools for images, motion and graphics: dither, ASCII and texture effects, fast.</li>
+<li><a href="https://www.tooooools.app/" target="_blank" rel="noopener">Tooooools</a> · a lo-fi effects lab: texture, noise, blur and analog character added to clean images.</li>
+<li><a href="https://efecto.app/fx" target="_blank" rel="noopener">Efecto</a> · quick image effects and filters in the browser.</li>
+<li><a href="https://constraint.systems/" target="_blank" rel="noopener">Constraint Systems</a> · a whole collection of odd, minimal browser tools for bending images and text. Worth an afternoon on its own.</li>
+<li><a href="https://tools.dia.tv/" target="_blank" rel="noopener">DIA Tools</a> · a collection of small browser tools for type and image play.</li>
+</ul>
+
+<h2><span class="stepno">04</span>Shaders</h2>
+<ul class="res">
+<li><a href="https://editor.isf.video/" target="_blank" rel="noopener">ISF Editor</a> · write and preview GLSL shaders in the browser. Shaders are small programs that run per pixel, and ISF files drop straight into VJ and video software.</li>
+</ul>
+
+<h2><span class="stepno">05</span>Utilities that save hours</h2>
+<ul class="res">
+<li><a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> · convert and compress video. When your file is too big to upload, this is the answer.</li>
+<li><a href="https://ffmpeg.org" target="_blank" rel="noopener">FFmpeg</a> · command-line video and audio surgery: convert, trim, extract frames, make GIFs. Steep but unmatched.</li>
+<li><a href="https://squoosh.app" target="_blank" rel="noopener">Squoosh</a> · compress images for the web without wrecking them.</li>
+<li><a href="https://cleanup.pictures" target="_blank" rel="noopener">Cleanup.pictures</a> · remove objects from photographs quickly.</li>
+</ul>
+
+<h2><span class="stepno">06</span>Type and colour</h2>
+<ul class="res">
+<li><a href="https://velvetyne.fr/" target="_blank" rel="noopener">Velvetyne</a> · a French libre type foundry publishing genuinely strange, characterful typefaces, all free to use. Where to go when Google Fonts feels too safe.</li>
+<li><a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a> · free, properly licensed typefaces, including a growing Arabic collection.</li>
+<li><a href="https://v-fonts.com" target="_blank" rel="noopener">v-fonts</a> · a catalogue of variable fonts: type with axes you can animate.</li>
+<li><a href="https://fontsinuse.com" target="_blank" rel="noopener">Fonts In Use</a> · typography documented in the wild, searchable by industry and format.</li>
+<li><a href="https://coolors.co" target="_blank" rel="noopener">Coolors</a> · fast palette building and extraction from images.</li>
+</ul>
+
+<h2><span class="stepno">07</span>Where to look at work</h2>
+<ul class="res">
+<li><a href="https://www.are.na" target="_blank" rel="noopener">Are.na</a> · research boards done properly. Start a channel per project and never lose a reference again.</li>
+<li><a href="https://openprocessing.org" target="_blank" rel="noopener">OpenProcessing</a> · thousands of p5 sketches with their code open. Read them, fork them, credit them.</li>
+<li><a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a> · where art and design film work actually lives, including most school showcases.</li>
+</ul>
+
+<div class="sketch">
+<div class="tag">Before next class</div>
+<p>Go through these in your own time, and play. Pick whichever ones pull you in, break them, push them, and bring in as much as you can make: screenshots, exports, recordings, half-finished things. There is no right or wrong here and nothing is graded, so aim high and show me as much as possible.</p>
+<p>We will look at what everyone brings at the start of next class.</p>
+</div>
+
+<p class="note">This page grows through the semester. If you find something good, send it and it goes up with your name next to it.</p>
+</section>
 <!-- ============ DEMO 01 HYDRA I ============ -->
 <section class="demo" id="d01">
 <div class="week">Demo 01</div>
@@ -140,8 +286,16 @@ gradient(0.4).out()        <span class="cm">// rgb gradient cycling at speed</sp
 voronoi(8, 0.5, 0.2).out() <span class="cm">// cellular pattern: density, speed, blending</span>
 solid(1, 0.2, 0.1).out()   <span class="cm">// flat color: r, g, b</span></pre></div>
 <p>Six sources are the entire alphabet. Everything else is what you do to them.</p>
-<div class="run" data-hydra="osc(10,0.1,1.2).rotate(0.2).out()">
-<button class="go">run this patch</button><div class="stage"></div></div>
+<div class="run" data-type="hydra">
+<textarea class="editor" spellcheck="false" rows="7">osc(10, 0.1, 1.2).out()
+
+// try these instead, one at a time:
+// noise(4, 0.2).out()
+// shape(3, 0.4, 0.01).out()
+// voronoi(8, 0.5, 0.2).out()
+// gradient(0.4).out()</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 
 
 <h2><span class="stepno">03</span>Geometry transforms</h2>
@@ -194,8 +348,15 @@ osc(20).modulateKaleid(noise(2), 4).out()
 osc(20).modulatePixelate(noise(5), 100).out()
 voronoi(6).modulateScrollX(osc(2), 0.2).out()</pre></div>
 <p>Modulation is where Hydra stops being stripes. The second signal is invisible; only its influence shows. Ask of every patch: what is seen, and what is only felt?</p>
-<div class="run" data-hydra="osc(30,0.1,1).modulate(noise(3,0.2),0.4).out()">
-<button class="go">run this patch</button><div class="stage"></div></div>
+<div class="run" data-type="hydra">
+<textarea class="editor" spellcheck="false" rows="6">osc(30, 0.1, 1)
+  .modulate(noise(3, 0.2), 0.4)
+  .out()
+
+// push the amount: 0.02 is a ripple, 1.5 is chaos
+// swap modulate for modulateRotate or modulateScale</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 
 
 <h2><span class="stepno">07</span>Numbers that move by themselves</h2>
@@ -385,8 +546,23 @@ function draw() {
   x = x + speed
   if (x > width + 50) x = -50   <span class="cm">// wrap around</span>
 }</pre></div>
-<div class="run" data-sketch="let x=0;function setup(){createCanvas(360,240)}function draw(){background(245);noStroke();fill(21,21,19);circle(x,120,70);x+=2;if(x>width+35)x=-35}">
-<button class="go">run this sketch</button><div class="stage"></div></div>
+<div class="run" data-type="p5">
+<textarea class="editor" spellcheck="false" rows="14">let x = 0
+
+function setup() {
+  createCanvas(360, 240)
+}
+
+function draw() {
+  background(245)
+  noStroke()
+  fill(21)
+  circle(x, 120, 70)
+  x = x + 2
+  if (x &gt; width + 35) x = -35
+}</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 
 <h2><span class="stepno">05</span>Conditionals + interaction</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
@@ -404,8 +580,20 @@ function draw() {
 function keyPressed() {
   if (key === 's') saveCanvas('frame', 'png')
 }</pre></div>
-<div class="run" data-sketch="function setup(){createCanvas(360,240)}function draw(){background(245);let d=dist(mouseX,mouseY,width/2,height/2);noStroke();if(mouseIsPressed){fill(229,35,27)}else{fill(21)}circle(width/2,height/2,max(d,10))}">
-<button class="go">run this sketch (move your mouse, click)</button><div class="stage"></div></div>
+<div class="run" data-type="p5">
+<textarea class="editor" spellcheck="false" rows="11">function setup() {
+  createCanvas(360, 240)
+}
+
+function draw() {
+  background(245)
+  let d = dist(mouseX, mouseY, width/2, height/2)
+  noStroke()
+  if (mouseIsPressed) { fill(229, 35, 27) } else { fill(21) }
+  circle(width/2, height/2, max(d, 10))
+}</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 
 
 <h2><span class="stepno">06</span>Loops: one rule, many marks</h2>
@@ -419,8 +607,24 @@ function keyPressed() {
     }
   }
 }</pre></div>
-<div class="run" data-sketch="function setup(){createCanvas(360,240)}function draw(){background(245);noStroke();fill(21,21,19);for(let x=0;x<width;x+=30){for(let y=0;y<height;y+=30){let s=noise(x*0.01,y*0.01,frameCount*0.01)*26;circle(x+15,y+15,s)}}}">
-<button class="go">run this sketch</button><div class="stage"></div></div>
+<div class="run" data-type="p5">
+<textarea class="editor" spellcheck="false" rows="15">function setup() {
+  createCanvas(360, 240)
+}
+
+function draw() {
+  background(245)
+  noStroke()
+  fill(21)
+  for (let x = 0; x &lt; width; x += 30) {
+    for (let y = 0; y &lt; height; y += 30) {
+      let s = noise(x*0.01, y*0.01, frameCount*0.01) * 26
+      circle(x + 15, y + 15, s)
+    }
+  }
+}</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 
 <h2><span class="stepno">07</span>random() vs noise()</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
@@ -436,8 +640,23 @@ function draw() {
 
 randomSeed(42)           <span class="cm">// same "random" every run: repeatable variation</span>
 noiseSeed(42)</pre></div>
-<div class="run" data-sketch="let t=0;function setup(){createCanvas(360,240)}function draw(){background(245,245,243,14);noStroke();fill(229,35,27);circle(noise(t)*width,noise(t+99)*height,32);t+=0.008}">
-<button class="go">run this sketch</button><div class="stage"></div></div>
+<div class="run" data-type="p5">
+<textarea class="editor" spellcheck="false" rows="14">let t = 0
+
+function setup() {
+  createCanvas(360, 240)
+  background(245)
+}
+
+function draw() {
+  background(245, 245, 243, 14)   // low alpha = trails
+  noStroke()
+  fill(229, 35, 27)
+  circle(noise(t) * width, noise(t + 99) * height, 32)
+  t += 0.008
+}</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 
 
 <h2><span class="stepno">08</span>Transformations</h2>
@@ -453,8 +672,25 @@ noiseSeed(42)</pre></div>
   circle(200, 0, 80)
   pop()                             <span class="cm">// restore: transforms are scoped</span>
 }</pre></div>
-<div class="run" data-sketch="function setup(){createCanvas(360,240)}function draw(){background(245);translate(width/2,height/2);noFill();stroke(21);for(let i=0;i<12;i++){push();rotate(frameCount*0.005+i*TWO_PI/12);rect(60,-20,60,40);pop()}}">
-<button class="go">run this sketch</button><div class="stage"></div></div>
+<div class="run" data-type="p5">
+<textarea class="editor" spellcheck="false" rows="16">function setup() {
+  createCanvas(360, 240)
+}
+
+function draw() {
+  background(245)
+  translate(width/2, height/2)
+  noFill()
+  stroke(21)
+  for (let i = 0; i &lt; 12; i++) {
+    push()
+    rotate(frameCount * 0.005 + i * TWO_PI/12)
+    rect(60, -20, 60, 40)
+    pop()
+  }
+}</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
 <p><code>push()/pop()</code> around every transformed element: the habit that keeps complex sketches sane. Circular layouts: <code>rotate</code> then draw at a fixed radius, inside a loop: that is exactly what the sketch above does.</p>
 
 <h2><span class="stepno">09</span>Media: images and video</h2>
@@ -1157,8 +1393,8 @@ function show(id){
   window.scrollTo({top:0});
 }
 function route(){
-  const id = location.hash ? location.hash.slice(1) : 'd01';
-  show(document.getElementById(id) ? id : 'd01');
+  const id = location.hash ? location.hash.slice(1) : 'd00';
+  show(document.getElementById(id) ? id : 'd00');
 }
 window.addEventListener('hashchange', route);
 route();
@@ -1180,35 +1416,52 @@ document.querySelectorAll('button[data-copy]').forEach(btn => {
 });
 
 
-// ---------- runnable hydra patches ----------
-document.querySelectorAll('.run[data-hydra]').forEach(box => {
-  const btn = box.querySelector('button.go');
-  btn.addEventListener('click', () => {
-    const stage = box.querySelector('.stage');
-    if (stage.querySelector('iframe')) { stage.innerHTML = ''; btn.textContent = 'run this patch'; return; }
-    const code = box.dataset.hydra;
-    const doc = '<!DOCTYPE html><html><head><scr' + 'ipt src="https://unpkg.com/hydra-synth"></scr' + 'ipt><style>body{margin:0;font:11px monospace;color:#888}canvas{display:block}<\/style></head><body><canvas id="hc" width="360" height="240"></canvas><div id="msg"></div><scr' + 'ipt>var tries=0;var t=setInterval(function(){tries++;if(typeof Hydra!=="undefined"){clearInterval(t);new Hydra({canvas:document.getElementById("hc"),detectAudio:false});' + code + '}else if(tries>50){clearInterval(t);document.getElementById("msg").textContent="hydra library could not load: check your connection"}},100)<\/scr' + 'ipt></body></html>';
-    const f = document.createElement('iframe');
-    f.width = 362; f.height = 242; f.setAttribute('title','hydra patch');
-    f.srcdoc = doc;
-    stage.appendChild(f);
-    btn.textContent = 'stop';
-  });
-});
+// ---------- runnable code editors ----------
+function buildDoc(kind, code) {
+  const s = '<' + 'script>', e = '</' + 'script>';
+  if (kind === 'hydra') {
+    return '<!DOCTYPE html><html><head><' + 'script src="https://unpkg.com/hydra-synth"></' + 'script>' +
+      '<style>body{margin:0;font:11px monospace;color:#888}canvas{display:block}</style></head><body>' +
+      '<canvas id="hc" width="360" height="240"></canvas><div id="msg"></div>' + s +
+      'var n=0;var t=setInterval(function(){n++;if(typeof Hydra!=="undefined"){clearInterval(t);' +
+      'try{new Hydra({canvas:document.getElementById("hc"),detectAudio:false});' +
+      '(function(){\n' + code + '\n})()}catch(err){document.getElementById("msg").textContent=err.message}' +
+      '}else if(n>60){clearInterval(t);document.getElementById("msg").textContent="hydra could not load: check your connection"}},100)' + e +
+      '</body></html>';
+  }
+  return '<!DOCTYPE html><html><head><' + 'script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></' + 'script>' +
+    '<style>body{margin:0;font:11px monospace;color:#888}canvas{display:block}</style></head><body>' + s +
+    'window.onerror=function(m){document.body.insertAdjacentHTML("beforeend","<div>"+m+"</div>")};\n' +
+    code + '\n' + e + '</body></html>';
+}
 
-// ---------- runnable p5 sketches ----------
-document.querySelectorAll('.run[data-sketch]').forEach(box => {
-  const btn = box.querySelector('button.go');
-  btn.addEventListener('click', () => {
-    const stage = box.querySelector('.stage');
-    if (stage.querySelector('iframe')) { stage.innerHTML = ''; btn.textContent = 'run this sketch'; return; }
-    const code = box.dataset.sketch;
-    const doc = '<!DOCTYPE html><html><head><scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></scr' + 'ipt><style>body{margin:0;display:flex}<\/style></head><body><scr' + 'ipt>' + code + '<\/scr' + 'ipt></body></html>';
+document.querySelectorAll('.run').forEach(box => {
+  const ta = box.querySelector('.editor');
+  const stage = box.querySelector('.stage');
+  const kind = box.dataset.type;
+  const original = ta.value;
+  const grow = () => { ta.rows = 1; ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight + 2) + 'px'; };
+  grow();
+  ta.addEventListener('input', grow);
+  ta.addEventListener('keydown', ev => {
+    if (ev.key === 'Tab') {
+      ev.preventDefault();
+      const s = ta.selectionStart;
+      ta.value = ta.value.slice(0, s) + '  ' + ta.value.slice(ta.selectionEnd);
+      ta.selectionStart = ta.selectionEnd = s + 2;
+    }
+    if ((ev.metaKey || ev.ctrlKey) && ev.key === 'Enter') { ev.preventDefault(); run(); }
+  });
+  function run() {
+    stage.innerHTML = '';
     const f = document.createElement('iframe');
-    f.width = 362; f.height = 242; f.setAttribute('title','p5 sketch');
-    f.srcdoc = doc;
+    f.width = 362; f.height = 242; f.setAttribute('title', 'sketch output');
+    f.srcdoc = buildDoc(kind, ta.value);
     stage.appendChild(f);
-    btn.textContent = 'stop';
+  }
+  box.querySelector('button.go').addEventListener('click', run);
+  box.querySelector('button.reset').addEventListener('click', () => {
+    ta.value = original; grow(); stage.innerHTML = '';
   });
 });
 
