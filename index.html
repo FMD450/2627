@@ -517,6 +517,7 @@ strokeText("LOOP").out()    <span class="cm">// outlined word</span></pre></div>
 <pre>text("LOOP").kaleid(4).out()
 text("LOOP").pixelate(30, 30).out()
 text("LOOP").rotate(() => mouse.x / width).out()</pre></div>
+<p class="note">Run each line on its own (cursor on the line, ctrl+enter). They all end in .out(), so whichever you ran last owns the screen.</p>
 <p class="note">Two more variants exist: fillStrokeText() draws the outline over the fill, strokeFillText() the fill over the outline.</p>
 
 <h2><span class="stepno">03</span>The control panel</h2>
@@ -526,19 +527,11 @@ text("LOOP").rotate(() => mouse.x / width).out()</pre></div>
 hydraText.fontStyle = "bold"      <span class="cm">// normal, italic, bold, bold italic</span>
 hydraText.fontSize = "auto"       <span class="cm">// auto fills the width; "60%" of that; "200px" exact</span>
 hydraText.textAlign = "center"    <span class="cm">// center, left, right</span>
-hydraText.fillStyle = "white"     <span class="cm">// fill colour: any css colour</span>
-hydraText.strokeStyle = "white"   <span class="cm">// outline colour</span>
-hydraText.lineWidth = "2%"        <span class="cm">// outline weight, % of the type size</span>
-hydraText.lineJoin = "miter"      <span class="cm">// corners: miter sharp, round soft, bevel cut</span></pre></div>
-<p>Why white: Hydra thinks in brightness. White means present, black means absent, and the masking tricks below depend on that. Colour is legal, but colour belongs to layering; white belongs to masking.</p>
-<p>Per-call shorthand for trying things without touching the panel:</p>
-<div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
-<pre>text("LOOP", "Courier New")
-text("LOOP", { font: "Georgia", fontStyle: "italic" })
-strokeText("LOOP", { strokeStyle: "red", lineWidth: "6%" })</pre></div>
+hydraText.fillStyle = "white"     <span class="cm">// fill colour: any css colour name</span></pre></div>
+<p>For <code>fillStyle</code>, any named web colour works: the full list lives at <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/named-color" target="_blank" rel="noopener">MDN's named colours page</a>. Keep it white when you plan to mask or mult the word with signal, since those tricks read brightness.</p>
 
 <h2><span class="stepno">04</span>Type as signal</h2>
-<p>Nothing new from here on. A word is a source, and everything from demo 01 applies to it:</p>
+<p>Nothing new from here on. A word is a source, and everything from demo 01 applies to it. Run each patch separately: they all end in .out(), so whichever you ran last owns the screen.</p>
 <div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
 <pre>osc(30, 0.05, 1).mult(text("LOOP")).out()   <span class="cm">// mult: the word as a stencil, signal pours through</span>
 
@@ -578,6 +571,18 @@ solid(0, 0, 0)                               <span class="cm">// feedback: the w
   .diff(strokeText(" hydra_! ").modulateScale(noise(1, 1), .4))
   .out()</pre></div>
 <p><code>diff</code> against <code>strokeText</code> of the same word, warped by noise: the near-twin interference trick from demo 01, done typographically. Now change the word, the font, the colorama rate, the noise amount. Four dials, four different pieces.</p>
+<p>One more dial: the ground itself. <code>solid</code> is just the quietest possible source. Swap it for any other and the whole piece changes character:</p>
+<div class="code"><div class="bar"><span>hydra · same patch, different grounds</span><button data-copy>copy</button></div>
+<pre>osc(8, 0.05, 1.2)
+  .blend(src(o0).scale(1.02).colorama(.02))
+  .layer(text(" hydra_! "))
+  .diff(strokeText(" hydra_! ").modulateScale(noise(1, 1), .4))
+  .out()
+
+<span class="cm">// or try starting with:</span>
+<span class="cm">// noise(3, 0.1)     a smoky ground</span>
+<span class="cm">// voronoi(6, 0.3)   a cellular ground</span>
+<span class="cm">// gradient(0.2)     a slow colour wash</span></pre></div>
 
 <h2><span class="stepno">06</span>Sound: the buckets</h2>
 <p>Play music out loud, then run:</p>
@@ -627,6 +632,7 @@ a.setCutoff(2)    <span class="cm">// the floor: quieter than this counts as zer
 <p class="note">The mic hears the room, so it hears your speakers: play music out loud. Laptops sometimes muffle their own speaker sound, so a phone or external speaker next to the laptop reacts better. a.hide() puts the bars away.</p>
 
 <h2><span class="stepno">10</span>Together: sound moves the type</h2>
+<p class="note">Three separate patches: run one at a time.</p>
 <div class="code"><div class="bar"><span>hydra</span><button data-copy>copy</button></div>
 <pre>text("SOUND").modulate(noise(2, 0.2), () => a.fft[0] * 0.3).out()
 <span class="cm">// the word wobbles when the bass hits. two lines, whole idea</span>
