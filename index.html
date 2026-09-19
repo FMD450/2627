@@ -121,7 +121,7 @@ ul.res li::before{content:"→";position:absolute;left:0;color:var(--mute)}
     <li><a href="#d02"><span class="n">02</span>Hydra II · Systems<span class="rec"></span></a></li>
     <li><a href="#d2t"><span class="n">03</span>Hydra III · Type + Sound<span class="rec"></span></a></li>
     <li><a href="#d03"><span class="n">04</span>p5.js<span class="rec"></span></a></li>
-    <li><a href="#d04"><span class="n">05</span>P5LIVE<span class="rec"></span></a></li>
+    <li><a href="#d04"><span class="n">05</span>HY5 · Hydra + p5<span class="rec"></span></a></li>
     <li><a href="#d05"><span class="n">06</span>TouchDesigner I · TOPs<span class="rec"></span></a></li>
     <li><a href="#d06"><span class="n">07</span>TouchDesigner II · CHOPs + Instancing<span class="rec"></span></a></li>
     <li><a href="#d07"><span class="n">08</span>Sound + Audio-Reactivity<span class="rec"></span></a></li>
@@ -129,7 +129,7 @@ ul.res li::before{content:"→";position:absolute;left:0;color:var(--mute)}
     <li><a href="#d09"><span class="n">10</span>Sensors + Inputs<span class="rec"></span></a></li>
   </ul>
   <div class="foot">One demo per session. One sketch per demo, due the following Monday.<br><br>Sketches are small: one honest evening of work.</div>
-  <div class="foot"><b>Credits.</b> This site teaches with tools made by others: <a href="https://ojack.xyz" target="_blank" rel="noopener">Hydra by Olivia Jack</a> · <a href="https://p5js.org" target="_blank" rel="noopener">p5.js by the Processing Foundation</a> (created by Lauren McCarthy; Processing by Casey Reas + Ben Fry) · <a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE by Ted Davis</a> · <a href="https://derivative.ca" target="_blank" rel="noopener">TouchDesigner by Derivative</a> · <a href="https://github.com/geikha/hyper-hydra" target="_blank" rel="noopener">hydra-text by geikha</a> · <a href="https://github.com/glowbox/maptasticjs" target="_blank" rel="noopener">Maptastic by Glowbox</a> · <a href="https://github.com/gohai/p5.webserial" target="_blank" rel="noopener">p5.webserial by Gottfried Haider</a>. Type: JetBrains Mono (JetBrains) + Archivo (Omnibus-Type), both under the SIL Open Font License, served via Google Fonts. Course materials by Mahmoud Hamdy, FMD 450, for educational use.</div>
+  <div class="foot"><b>Credits.</b> This site teaches with tools made by others: <a href="https://ojack.xyz" target="_blank" rel="noopener">Hydra by Olivia Jack</a> · <a href="https://p5js.org" target="_blank" rel="noopener">p5.js by the Processing Foundation</a> (created by Lauren McCarthy; Processing by Casey Reas + Ben Fry) · <a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE</a> · <a href="https://github.com/ffd8/HY5" target="_blank" rel="noopener">HY5, both by Ted Davis</a> · <a href="https://derivative.ca" target="_blank" rel="noopener">TouchDesigner by Derivative</a> · <a href="https://github.com/geikha/hyper-hydra" target="_blank" rel="noopener">hydra-text by geikha</a> · <a href="https://github.com/glowbox/maptasticjs" target="_blank" rel="noopener">Maptastic by Glowbox</a> · <a href="https://github.com/gohai/p5.webserial" target="_blank" rel="noopener">p5.webserial by Gottfried Haider</a>. Type: JetBrains Mono (JetBrains) + Archivo (Omnibus-Type), both under the SIL Open Font License, served via Google Fonts. Course materials by Mahmoud Hamdy, FMD 450, for educational use.</div>
 </nav>
 <main>
 <!-- ============ 00 START HERE ============ -->
@@ -189,7 +189,6 @@ ul.res li::before{content:"→";position:absolute;left:0;color:var(--mute)}
 </ul>
 
 </section>
-
 <!-- ============ TOOLS ============ -->
 <section class="demo" id="tools">
 <div class="week">Reference</div>
@@ -395,7 +394,7 @@ osc(30, 0.1, [0, 1.5].smooth()).out()        <span class="cm">// glide, not step
 <li><a href="https://hydra.ojack.xyz/docs/" target="_blank" rel="noopener">Hydra documentation</a>: the official getting-started and guides</li>
 <li><a href="https://hydra.ojack.xyz/functions/" target="_blank" rel="noopener">Interactive function reference</a>: every function with a live editable example</li>
 <li><a href="https://hydra.ojack.xyz/garden/" target="_blank" rel="noopener">Hydra garden</a>: community, examples, performances</li>
-<li><a href="https://hydra-book.glitches.me/#/" target="_blank" rel="noopener">Hydra Book</a> by Naoto Hieda: techniques organized as a free book</li>
+<li><a href="https://github.com/naotohieda/hydra-book" target="_blank" rel="noopener">Hydra Book</a> by Naoto Hieda: techniques organized as a free book</li>
 <li><a href="https://github.com/hydra-synth" target="_blank" rel="noopener">hydra-synth on GitHub</a>: the source, extensions, and related projects</li>
 </ul>
 <div class="tip">Read one patch aloud in signal-path English before you run it: "an oscillator, kaleided by noise, differenced against its twin." If you cannot say it, you copied it.</div>
@@ -406,7 +405,6 @@ osc(30, 0.1, [0, 1.5].smooth()).out()        <span class="cm">// glide, not step
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
-
 <!-- ============ DEMO 02 HYDRA II ============ -->
 <section class="demo" id="d02">
 <div class="week">Demo 02</div>
@@ -671,408 +669,370 @@ osc(30, 0.05, 1)
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
-<!-- ============ DEMO 03 P5 ============ -->
+<!-- ============ DEMO 04 p5.js ============ -->
 <section class="demo" id="d03">
 <div class="week">Demo 04</div>
-<h1>p5.js</h1>
-<p class="lede">A JavaScript library for drawing, animation, and interaction: where Hydra is a synthesizer, p5 is a sketchbook: every mark is yours. Work at <a href="https://editor.p5js.org" target="_blank" rel="noopener">editor.p5js.org</a> (make an account) and keep the <a href="https://p5js.org/reference/" target="_blank" rel="noopener">reference</a> open in a tab: it is the actual textbook of this course.</p>
-<div class="intro"><b>Some lore.</b> In 2001, Casey Reas and Ben Fry built Processing at the MIT Media Lab: a language that treated code as a sketchbook for artists rather than an engineering tool, and it quietly rewired a generation of design education. In 2014 Lauren McCarthy rebuilt the idea for the web as p5.js, with a community famous for being kind to beginners. When you type <i>setup()</i> and <i>draw()</i>, you are using a convention two decades of artists have thought in: it is less a library than a dialect.</div>
+<h1>p5.js · The Sketchbook</h1>
+<p class="lede">Hydra was a synthesizer: you plugged signals together and the machine made the image. p5 is a sketchbook: nothing exists until you draw it. Today we learn the basics, then build a brush.</p>
 
+<h2><span class="stepno">01</span>Where it came from</h2>
+<p>In 2001 Casey Reas and Ben Fry built Processing at the MIT Media Lab: a language that treated code as a sketchbook for artists rather than an engineering tool. In 2014 Lauren McCarthy rebuilt the idea for the web as p5.js, with a community known for being kind to beginners. When you type setup() and draw(), you are using a convention two decades of artists have thought in.</p>
+<p>Work in the <a href="https://editor.p5js.org" target="_blank" rel="noopener">p5.js web editor</a>. Make an account so your sketches save.</p>
+<div class="tip">Keep <a href="https://p5js.org/reference/" target="_blank" rel="noopener">p5js.org/reference</a> open in a tab. Nobody memorises these functions. Looking things up is the job, not a sign you are behind.</div>
 
-<h2><span class="stepno">01</span>setup + draw</h2>
+<h2><span class="stepno">02</span>The two boxes</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
 <pre>function setup() {
-  createCanvas(600, 600)   <span class="cm">// runs once</span>
+  createCanvas(600, 600)
 }
 
 function draw() {
-  background(245)          <span class="cm">// runs 60×/second, forever</span>
+  background(245)
   circle(300, 300, 200)
 }</pre></div>
-<p>Comment out <code>background()</code> and drawings accumulate: that single decision (clear or keep) splits all of p5 into animation versus painting.</p>
+<ul class="plain">
+<li><b>setup</b> runs once, at the start. It sets the stage: canvas size, and later your colour settings.</li>
+<li><b>draw</b> runs 60 times a second, forever. Everything inside is redrawn from scratch each time, whether or not anything changed.</li>
+<li><b>circle(300, 300, 200)</b> is x across, y down, then size. The numbers in the brackets are what the function needs, always in a fixed order.</li>
+</ul>
+<p>Change the three numbers and run again. Your sketch is not a picture, it is a flipbook being drawn 60 times a second.</p>
 
-<h2><span class="stepno">02</span>Shape + coordinates</h2>
+<h2><span class="stepno">03</span>The canvas is graph paper</h2>
+<p><b>0,0 is the top-left corner.</b> X grows to the right, as you would expect. <b>Y grows downward</b>, the opposite of the graphs you drew at school, so y = 500 is near the bottom.</p>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>rect(50, 50, 200, 100)         <span class="cm">// x, y, w, h · origin top-left, y grows down</span>
-circle(300, 300, 120)
-ellipse(300, 300, 160, 80)
-line(0, 0, width, height)
-triangle(100, 300, 200, 100, 300, 300)
+<pre>circle(150, 150, 120)        <span class="cm">// x, y, diameter</span>
+square(320, 90, 120)         <span class="cm">// x, y, size</span>
+rect(90, 320, 200, 100)      <span class="cm">// x, y, width, height</span>
+ellipse(430, 420, 160, 90)   <span class="cm">// x, y, width, height</span>
+line(0, 560, 600, 560)       <span class="cm">// x1, y1, x2, y2</span>
+triangle(300, 470, 250, 560, 350, 560)</pre></div>
+<p>Every shape wants its numbers in its own order, which is what the reference is for. Two words make sketches flexible:</p>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>circle(width / 2, height / 2, 120)</pre></div>
+<p><b>width</b> and <b>height</b> are filled in by p5 with your canvas size, so width/2 is always the centre. Typing 300 works today and breaks the moment you resize.</p>
 
-beginShape()                    <span class="cm">// any polygon, point by point</span>
+<h2><span class="stepno">04</span>Shapes p5 has never heard of</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>beginShape()
 vertex(100, 100)
-vertex(300, 150)
-vertex(200, 320)
-endShape(CLOSE)
+vertex(400, 180)
+vertex(500, 350)
+vertex(250, 480)
+vertex(120, 320)
+endShape(CLOSE)</pre></div>
+<p>Connect the dots. <b>beginShape()</b> puts the pen down, each <b>vertex(x, y)</b> marks one corner and p5 draws a line from the last corner to this one, <b>endShape()</b> lifts the pen, and <b>CLOSE</b> draws the final line back to the start.</p>
+<p>circle and rect are shapes p5 already knows. vertex is how you draw a shape it has never heard of, and there is no limit on how many points you use. <b>curveVertex()</b> does the same thing but curves through the points instead of connecting them with straight lines.</p>
 
-strokeWeight(4)
-noFill()</pre></div>
-
-<h2><span class="stepno">03</span>Color</h2>
+<h2><span class="stepno">05</span>Colour</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>fill(229, 35, 27)          <span class="cm">// rgb</span>
-fill(229, 35, 27, 120)     <span class="cm">// + alpha: transparency is a design tool</span>
-stroke(21)
+<pre>background(20)
 noStroke()
+fill(229, 35, 27)
+circle(220, 250, 260)
+fill(60, 120, 255, 120)
+circle(380, 350, 260)</pre></div>
+<ul class="plain">
+<li><b>fill(r, g, b)</b> takes red, green, blue, each 0 to 255. One number on its own is grey: fill(0) black, fill(255) white.</li>
+<li>The <b>fourth number is transparency</b>. 120 out of 255 is half see-through, so overlapping shapes build up like ink.</li>
+<li><b>fill is a setting that stays on</b>, not a property of a shape. Everything drawn after it uses that colour until another fill changes it. That is why people write one fill at the top and wonder why everything matches.</li>
+<li>Also: noStroke() removes outlines, stroke(255) sets an outline colour, strokeWeight(4) its thickness, noFill() leaves only the outline.</li>
+</ul>
+<p>If you would rather think in hue than in three channels, put <code>colorMode(HSB, 360, 100, 100)</code> in setup. Then fill(200, 80, 90) is hue, saturation, brightness, and you can walk a gradient by changing one number.</p>
 
-colorMode(HSB, 360, 100, 100)   <span class="cm">// hue-based thinking</span>
-fill(200, 80, 90)               <span class="cm">// a hue you can reason about</span>
-lerpColor(color('#151513'), color('#E5231B'), 0.5)  <span class="cm">// mix two colors</span></pre></div>
-
-<h2><span class="stepno">04</span>Variables</h2>
+<h2><span class="stepno">06</span>The mouse</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>let x = 0
-let speed = 2
-
-function setup() { createCanvas(600, 600) }
-
-function draw() {
-  background(245)
-  circle(x, 300, 100)
-  x = x + speed
-  if (x > width + 50) x = -50   <span class="cm">// wrap around</span>
-}</pre></div>
-<div class="run" data-type="p5">
-<textarea class="editor" spellcheck="false" rows="14">let x = 0
-
-function setup() {
-  createCanvas(360, 240)
-}
-
-function draw() {
+<pre>function draw() {
   background(245)
   noStroke()
   fill(21)
-  circle(x, 120, 70)
-  x = x + 2
-  if (x &gt; width + 35) x = -35
-}</textarea>
-<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
-<div class="stage"></div></div>
-
-<h2><span class="stepno">05</span>Conditionals + interaction</h2>
-<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>function draw() {
-  background(245)
-  if (mouseIsPressed) {
-    fill(229, 35, 27)
-  } else {
-    fill(21)
-  }
-  let d = dist(mouseX, mouseY, width/2, height/2)
-  circle(width/2, height/2, d)      <span class="cm">// distance as a design value</span>
-}
-
-function keyPressed() {
-  if (key === 's') saveCanvas('frame', 'png')
+  circle(mouseX, mouseY, 50)
 }</pre></div>
-<div class="run" data-type="p5">
-<textarea class="editor" spellcheck="false" rows="11">function setup() {
-  createCanvas(360, 240)
+<p><b>mouseX</b> and <b>mouseY</b> are where your cursor is right now. Same two words you used in Hydra, except here you do not need the arrow: in Hydra you wrote () => to say ask this again every frame, and in p5 the whole draw block is already being asked again every frame.</p>
+
+<h2><span class="stepno">07</span>Move one line, it becomes a brush</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  createCanvas(600, 600)
+  background(245)
 }
 
 function draw() {
-  background(245)
-  let d = dist(mouseX, mouseY, width/2, height/2)
-  noStroke()
-  if (mouseIsPressed) { fill(229, 35, 27) } else { fill(21) }
-  circle(width/2, height/2, max(d, 10))
-}</textarea>
-<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
-<div class="stage"></div></div>
-
-
-<h2><span class="stepno">06</span>Loops: one rule, many marks</h2>
-<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>function draw() {
-  background(245)
-  for (let x = 0; x &lt; width; x += 40) {
-    for (let y = 0; y &lt; height; y += 40) {
-      let s = noise(x * 0.01, y * 0.01, frameCount * 0.01) * 36
-      circle(x + 20, y + 20, s)
-    }
-  }
-}</pre></div>
-<div class="run" data-type="p5">
-<textarea class="editor" spellcheck="false" rows="15">function setup() {
-  createCanvas(360, 240)
-}
-
-function draw() {
-  background(245)
   noStroke()
   fill(21)
-  for (let x = 0; x &lt; width; x += 30) {
-    for (let y = 0; y &lt; height; y += 30) {
-      let s = noise(x*0.01, y*0.01, frameCount*0.01) * 26
-      circle(x + 15, y + 15, s)
-    }
-  }
-}</textarea>
-<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
-<div class="stage"></div></div>
+  circle(mouseX, mouseY, 50)
+}</pre></div>
+<p><b>background() inside draw</b> wipes the screen 60 times a second, so you only ever see the newest circle: that is animation. <b>background() inside setup</b> paints once, at the start, so every circle stays: that is painting. One line, moved, and it is the biggest decision in p5.</p>
 
-<h2><span class="stepno">07</span>random() vs noise()</h2>
+<h2><span class="stepno">08</span>Let the mouse choose the colour</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>random(width)            <span class="cm">// dice: a new unrelated value each call</span>
-noise(t)                 <span class="cm">// weather: smooth, continuous, 0-1</span>
-
-let t = 0
-function draw() {
-  background(245, 20)    <span class="cm">// low-alpha background = trails</span>
-  circle(noise(t) * width, noise(t + 99) * height, 50)
-  t += 0.01
-}
-
-randomSeed(42)           <span class="cm">// same "random" every run: repeatable variation</span>
-noiseSeed(42)</pre></div>
-<div class="run" data-type="p5">
-<textarea class="editor" spellcheck="false" rows="14">let t = 0
-
-function setup() {
-  createCanvas(360, 240)
-  background(245)
-}
-
-function draw() {
-  background(245, 245, 243, 14)   // low alpha = trails
+<pre>function setup() {
+  createCanvas(600, 600)
+  background(20)
   noStroke()
-  fill(229, 35, 27)
-  circle(noise(t) * width, noise(t + 99) * height, 32)
-  t += 0.008
-}</textarea>
-<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
-<div class="stage"></div></div>
+}
 
+function draw() {
+  fill(mouseX / 3, 100, 255 - mouseX / 3, 80)
+  circle(mouseX, mouseY, 50)
+}</pre></div>
+<p>Same fill as before, except the numbers are no longer fixed. mouseX runs 0 to 600, so dividing by 3 gives 0 to 200: a number in the range fill wants. Move right and red climbs while blue falls. <b>Your position on screen is now choosing the colour</b>, which is the whole idea: one value driving another.</p>
 
-<h2><span class="stepno">08</span>Transformations</h2>
+<h2><span class="stepno">09</span>Speed changes the size</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
 <pre>function draw() {
-  background(245)
-  translate(width/2, height/2)     <span class="cm">// move the origin</span>
-  rotate(frameCount * 0.01)        <span class="cm">// everything after rotates</span>
-  rect(-100, -100, 200, 200)
-
-  push()                            <span class="cm">// save the current state</span>
-  rotate(PI/4); scale(0.5)
-  circle(200, 0, 80)
-  pop()                             <span class="cm">// restore: transforms are scoped</span>
+  let speed = dist(mouseX, mouseY, pmouseX, pmouseY)
+  fill(mouseX / 3, 100, 255 - mouseX / 3, 80)
+  circle(mouseX, mouseY, speed * 3)
 }</pre></div>
-<div class="run" data-type="p5">
-<textarea class="editor" spellcheck="false" rows="16">function setup() {
-  createCanvas(360, 240)
+<ul class="plain">
+<li><b>pmouseX</b> and <b>pmouseY</b> are where the mouse was on the previous frame. p5 remembers for you.</li>
+<li><b>dist()</b> measures the distance between two points. Distance between where the mouse was and where it is now equals how fast you are moving.</li>
+<li><b>let speed = ...</b> makes a labelled box called speed and puts that number in it, so you can write speed instead of typing it out again.</li>
+</ul>
+<p>Draw slowly for a thin line, quickly for fat blobs. Pressure sensitivity with no hardware.</p>
+
+<h2><span class="stepno">10</span>Mirror it</h2>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  createCanvas(600, 600)
+  background(20)
+  noStroke()
 }
 
 function draw() {
-  background(245)
-  translate(width/2, height/2)
-  noFill()
-  stroke(21)
-  for (let i = 0; i &lt; 12; i++) {
-    push()
-    rotate(frameCount * 0.005 + i * TWO_PI/12)
-    rect(60, -20, 60, 40)
-    pop()
-  }
+  let speed = dist(mouseX, mouseY, pmouseX, pmouseY)
+  let s = speed * 3
+  fill(mouseX / 3, 100, 255 - mouseX / 3, 80)
+  circle(mouseX, mouseY, s)
+  circle(width - mouseX, mouseY, s)
+  circle(mouseX, height - mouseY, s)
+  circle(width - mouseX, height - mouseY, s)
+}</pre></div>
+<p>Same circle, four places. width is 600, so <b>width - mouseX</b> is the mirror position: mouse 100 from the left becomes 100 from the right. You did not draw that shape. You drew a squiggle, and a rule turned it into that.</p>
+
+<h2><span class="stepno">11</span>Try it here</h2>
+<p>Edit the code and run it. Move your cursor inside the frame to draw.</p>
+<div class="run" data-type="p5">
+<textarea class="editor" spellcheck="false" rows="6">function setup() {
+  createCanvas(360, 240)
+  background(20)
+  noStroke()
+}
+
+function draw() {
+  let speed = dist(mouseX, mouseY, pmouseX, pmouseY)
+  let s = speed * 3
+  fill(mouseX / 2, 100, 255 - mouseX / 2, 80)
+  circle(mouseX, mouseY, s)
+  circle(width - mouseX, mouseY, s)
+  circle(mouseX, height - mouseY, s)
+  circle(width - mouseX, height - mouseY, s)
 }</textarea>
 <div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
 <div class="stage"></div></div>
-<p><code>push()/pop()</code> around every transformed element: the habit that keeps complex sketches sane. Circular layouts: <code>rotate</code> then draw at a fixed radius, inside a loop: that is exactly what the sketch above does.</p>
 
-<h2><span class="stepno">09</span>Media: images and video</h2>
+<h2><span class="stepno">12</span>Saving, and reading errors</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>let img, cam
-function preload() {
-  img = loadImage('photo.jpg')     <span class="cm">// upload via the editor's file panel</span>
-}
-function setup() {
-  createCanvas(640, 480)
-  cam = createCapture(VIDEO)
-  cam.size(640, 480)
-  cam.hide()
-}
-function draw() {
-  image(cam, 0, 0)                 <span class="cm">// or image(img, 0, 0, width, height)</span>
-  <span class="cm">// generative layer over live video:</span>
-  stroke(229, 35, 27)
-  for (let i = 0; i &lt; 20; i++) {
-    let y = noise(i, frameCount * 0.01) * height
-    line(0, y, width, y)
-  }
+<pre>function keyPressed() {
+  if (key === 's') saveCanvas('brush', 'png')
+  if (key === 'g') saveGif('loop', 4)
 }</pre></div>
-<p>Swap <code>createCapture</code> for <code>createVideo('clip.mp4')</code> (then <code>.loop()</code>) to draw over your own footage: two kinds of image, one frame: the FMD 405 Project 1 move. <code>img.get(x, y)</code> reads a pixel's color: sample your footage to drive the drawing.</p>
+<p>saveGif('loop', 4) records four seconds, which is the fastest route to a sketch submission. Errors appear in the console at the bottom of the editor <b>with a line number</b>: read that line and the one above it. Almost every error you hit this semester is a missing bracket, a capital letter in the wrong place, or a variable used before it was made.</p>
 
-<h2><span class="stepno">10</span>Type</h2>
-<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
-<pre>let f
-function preload() { f = loadFont('font.otf') }
-function setup() {
-  createCanvas(800, 400)
-  textFont(f); textSize(120); textAlign(CENTER, CENTER)
-}
-function draw() {
-  background(245); fill(21)
-  text('SIGNAL', width/2, height/2 + sin(frameCount * 0.05) * 20)
-}
-
-<span class="cm">// letters as particles:</span>
-let pts = f.textToPoints('SIGNAL', 80, 260, 160, { sampleFactor: 0.2 })</pre></div>
-
-<h2><span class="stepno">11</span>Export</h2>
-<p><code>saveCanvas('name', 'png')</code> for stills; <code>saveGif('loop', 4)</code> records four seconds as a GIF: perfect for sketch submissions. For video, screen-record, or meet CCapture later in the semester.</p>
-
-<div class="tip">Errors live in the console at the bottom of the editor, with a line number. Ninety percent of them are a missing bracket or a lowercase/uppercase mismatch. Read before asking.</div>
+<h2><span class="stepno">13</span>If you want to go further</h2>
+<p>None of this is needed for the sketch, but it is where p5 opens up.</p>
+<ul class="res">
+<li><b>Loops</b> · one line that draws two hundred shapes instead of one. A for loop walks across the canvas, and a loop inside a loop gives you a grid where every cell asks the same question and answers differently.</li>
+<li><b>random and noise</b> · random() jumps, noise() wanders. If you want something to move rather than flicker, you want noise.</li>
+<li><b>Transformations</b> · translate() moves the origin, rotate() spins the coordinate system, push() and pop() save and restore it. Rotate, then draw at a radius, is every radial composition you will ever make.</li>
+<li><b>Video</b> · createCapture(VIDEO) for the webcam, createVideo('clip.mp4') for a file, then draw over it with image(). Add cam.hide() so you only see your version.</li>
+<li><a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE</a> · p5 for live coding by Ted Davis. It recompiles as you type, with collaborative rooms and a library of sketches built in. Worth a look if you liked the feel of coding live in Hydra.</li>
+<li><a href="https://openprocessing.org" target="_blank" rel="noopener">OpenProcessing</a> · thousands of p5 sketches with their code open. Read them, fork them, credit them.</li>
+</ul>
 
 <div class="sketch">
-<div class="tag">Sketch 04 · p5.js</div>
-<p>A sketch built on a loop (grid, ring, swarm) using <code>noise()</code> for motion, <code>push/pop</code> transforms, and one meaningful interaction. Bonus layer: draw it over camera or your own footage. Submit the editor link and a GIF or recording.</p>
+<div class="tag">Sketch 04 · Your brush</div>
+<p>Start from the brush we built and make it yours. Change at least three things: the colours, the background, the shape it draws with, the transparency, the brush weight, the number of mirrors. Build your own nib with beginShape and vertex if you want one.</p>
+<p>Submit a still you are happy with, plus a 20 to 30 second screen recording of you drawing with it. A version run through Hydra is welcome: see the next demo.</p>
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
-
-<!-- ============ DEMO 04 P5LIVE ============ -->
+<!-- ============ DEMO 05 HY5 ============ -->
 <section class="demo" id="d04">
 <div class="week">Demo 05</div>
-<h1>P5LIVE</h1>
-<p class="lede"><a href="https://teddavis.org" target="_blank" rel="noopener">Ted Davis</a>'s live-coding environment for p5.js: your sketch recompiles as you type, fullscreen, with collaborative rooms. Same p5 you already know, performed instead of composed. Runs at <a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">teddavis.org/p5live</a>: nothing to install.</p>
+<h1>HY5 · Hydra + p5 Together</h1>
+<p class="lede">You now have two tools that do opposite things. Hydra is a synthesizer, p5 is a sketchbook. HY5 bridges them, and the bridge runs both ways. Which way you point it changes what you can make.</p>
 
-<div class="intro"><b>Some lore.</b> Live coding comes from music: since the early 2000s, performers have written code on stage, projected for the audience, at events called algoraves: the community's founding document literally demands "show us your screens." The thrill is honesty: every crash and every save happens in public. P5LIVE, built by Ted Davis, brings that culture to p5: the sketch never stops while you rewrite it, which changes coding from composing into performing.</div>
-<h2><span class="stepno">01</span>Orientation</h2>
+<h2><span class="stepno">01</span>The tool</h2>
+<p><b>HY5</b> is by <a href="https://teddavis.org" target="_blank" rel="noopener">Ted Davis</a>, the same person behind P5LIVE and basil.js. It loads hydra-synth and p5.js together in one page with both in global mode, so you write Hydra chains and p5 functions side by side and pass images between them.</p>
+<p>Work in <a href="https://hy5live.teddavis.org" target="_blank" rel="noopener">hy5live.teddavis.org</a>, a minimal live-coding editor with everything already loaded. Nothing to install. HY5 is also built into P5LIVE as a library if you prefer that environment.</p>
+<div class="tip">Use Chrome. HY5 stacks several full-size canvases, and Chromium handles it best. If your machine struggles, add H.pixelDensity(1) and pixelDensity(1) to drop the resolution.</div>
+
+<h2><span class="stepno">02</span>Order matters</h2>
+<p>There are three ways to wire the two tools together, and they are not interchangeable. Each one decides which tool has the last word on the image.</p>
 <ul class="plain">
-<li>Code floats over the fullscreen canvas. <kbd>ctrl</kbd>+<kbd>enter</kbd> recompiles; with live-coding mode active it recompiles as you type.</li>
-<li>The menu hides on the left edge: sketches save to your browser's local storage: export your code regularly (settings → export) because local storage is not a backup.</li>
-<li>Press <kbd>ctrl</kbd>+<kbd>,</kbd> (or the menu) for settings: font size, theme, autocompile.</li>
-<li>References panel and shortcuts list live in the menu: skim them once now.</li>
+<li><b>p5 into Hydra.</b> You compose something exact in p5, then Hydra wrecks it. p5 gives precision, Hydra gives texture. The final image is a Hydra image.</li>
+<li><b>Hydra into p5.</b> Hydra makes the material, p5 decides where it goes. Use it as a fill, a texture on 3D geometry, or tiles in a grid. The final image is a p5 image, so it stays sharp and controlled.</li>
+<li><b>Hydra into p5 and back into Hydra.</b> Hydra generates, p5 shapes it, then a second Hydra instance processes the result. Three stages, and each one can only work on what reached it.</li>
 </ul>
+<p>The thing to notice: <b>whatever comes last is what you see</b>, and everything before it has already been flattened into an image. Hydra cannot un-flatten a p5 shape back into geometry, and p5 cannot recover the signal that made a Hydra frame. Decide the order before you build, because it is not a setting you can flip at the end.</p>
 
-<h2><span class="stepno">02</span>softCompile: the reason P5LIVE exists</h2>
-<div class="code"><div class="bar"><span>p5live</span><button data-copy>copy</button></div>
-<pre>let n = 0
+<h2><span class="stepno">03</span>p5 into Hydra</h2>
+<p>One line in setup turns your p5 canvas into a Hydra source. Here is the brush from demo 04, bent by Hydra. Full code:</p>
+<div class="code"><div class="bar"><span>hy5 · p5 » hydra</span><button data-copy>copy</button></div>
+<pre>s0.initP5()
+P5.toggle(0)
+
+src(s0)
+  .kaleid(6)
+  .colorama(0.01)
+  .out()
 
 function setup() {
-  createCanvas(windowWidth, windowHeight)
-  background(245)
-}
-
-function draw() {
-  fill(21, 10)
+  createCanvas(600, 600)
+  background(20)
   noStroke()
-  circle(noise(n) * width, noise(n + 9) * height, 60)
-  n += 0.005
-}</pre></div>
-<p>Change a number in <code>draw()</code> and recompile: P5LIVE's softCompile only re-runs the changed functions, so your canvas is not cleared and your variables keep their values: the piece evolves without restarting. Change <code>setup()</code> and it hard-compiles (fresh canvas). Live coding is learning which of your edits are soft and which are hard.</p>
+}
 
-<h2><span class="stepno">03</span>Write for performance</h2>
+function draw() {
+  let speed = dist(mouseX, mouseY, pmouseX, pmouseY)
+  let s = speed * 3
+  fill(mouseX / 3, 100, 255 - mouseX / 3, 80)
+  circle(mouseX, mouseY, s)
+  circle(width - mouseX, mouseY, s)
+  circle(mouseX, height - mouseY, s)
+  circle(width - mouseX, height - mouseY, s)
+}</pre></div>
 <ul class="plain">
-<li>Global "dials" at the top: <code>let SIZE = 60, SPEED = 0.005, HUE = 0</code>: performing is editing the dials.</li>
-<li>Low-alpha backgrounds (<code>background(245, 8)</code>) or none: accumulation reads better live than hard resets.</li>
-<li>Keep a few commented blocks ready and un-comment them as the set builds: structure prepared, numbers improvised: same discipline as Hydra II.</li>
+<li><b>s0.initP5()</b> hands the p5 canvas to Hydra as source s0. From that moment it behaves like a camera or a video: everything you know about src() applies.</li>
+<li><b>P5.toggle(0)</b> hides the p5 canvas so you only see Hydra's version. P5.toggle() on its own flips it back, which is useful for checking what you actually drew.</li>
 </ul>
 
-<h2><span class="stepno">04</span>COCODING: the shared sketch</h2>
-<p>From the menu, start a COCODING session: you get a room URL; everyone who opens it types into the same sketch, live. Class exercise today: one room, one rule ("only circles; only two colors"), everyone adds one function. Chaos is the point: then we discuss what survived. The host can lock the room and grant write access selectively: useful when chaos stops being the point.</p>
+<h2><span class="stepno">04</span>Hydra into p5</h2>
+<p><b>H.get()</b> hands Hydra's output back as a p5 image. From there it is ordinary material: draw it, tile it, mask it, wrap it around geometry. This one tiles the same live Hydra frame into a grid, with the tiles sized by how close your cursor is.</p>
+<div class="code"><div class="bar"><span>hy5 · hydra » p5</span><button data-copy>copy</button></div>
+<pre>H.toggle(0)
 
-<h2><span class="stepno">05</span>Hydra inside P5LIVE</h2>
-<div class="code"><div class="bar"><span>p5live</span><button data-copy>copy</button></div>
-<pre><span class="cm">// P5LIVE can load libraries via a comment at the top:</span>
-// libs: https://unpkg.com/hydra-synth
+osc(18, 0.06, 1.1)
+  .modulate(noize(2, 0.2), 0.3)
+  .out()
 
-let hydra
 function setup() {
-  createCanvas(windowWidth, windowHeight)
-  hydra = new Hydra({ detectAudio: false }).synth
-  hydra.osc(10, 0.1, 1.2).out()      <span class="cm">// hydra running under p5</span>
+  createCanvas(600, 600)
+  noStroke()
 }
 
 function draw() {
-  <span class="cm">// draw p5 on top of the hydra canvas layer</span>
-  fill(245); noStroke()
-  circle(mouseX, mouseY, 80)
+  background(245)
+  let tex = H.get()
+  for (let x = 0; x &lt; width; x += 100) {
+    for (let y = 0; y &lt; height; y += 100) {
+      let s = 100 - dist(mouseX, mouseY, x + 50, y + 50) / 8
+      image(tex, x, y, s, s)
+    }
+  }
 }</pre></div>
-<p>The two tools you know become one instrument: Hydra textures under p5 drawing. If the libs line trips you up today, run them side by side (two windows) and composite later: the point is the mindset, not the plumbing.</p>
-
-<h2><span class="stepno">06</span>Snippets</h2>
-<p>P5LIVE ships a snippets menu (WEBGL templates, audio input, recording helpers): browse it before writing from scratch. Anything you paste, read line by line and be able to explain at crit: the snippet rule of this studio.</p>
-
-<h2><span class="stepno">07</span>Recording your set</h2>
 <ul class="plain">
-<li>P5LIVE's menu includes an export/recording helper among the snippets: test it before the night you need it.</li>
-<li>The reliable fallback: OBS or the system screen recorder, capturing the fullscreen tab at 1080p. Record the audio of the room if you are performing to sound.</li>
-<li>Keep the code visible in the recording: in this course the typing is part of the work.</li>
+<li><b>H.get()</b> returns the current Hydra frame as an image you can pass to image(), texture(), or use as a fill.</li>
+<li><b>H.toggle(0)</b> hides the Hydra canvas so only your p5 composition shows.</li>
+<li>Hydra outputs also arrive named with an h prefix: <b>h0</b> is o0, h1 is o1, and so on, if you want a specific buffer rather than the main one.</li>
 </ul>
+<p>The same move in 3D: <code>createCanvas(600, 600, WEBGL)</code>, then <code>texture(H.get())</code> before a box, sphere or torus, and your Hydra patch becomes the surface of an object you can rotate.</p>
 
-<h2><span class="stepno">08</span>Five starters to live-edit</h2>
-<p>Paste one, run it, then change it live: sizes, counts, colors, speeds. Each is deliberately underdesigned: the performance is what you grow it into.</p>
-<div class="code"><div class="bar"><span>p5live · walkers</span><button data-copy>copy</button></div>
-<pre>let w = []
+<h2><span class="stepno">05</span>Hydra into p5 and back into Hydra</h2>
+<p>The full round trip. Hydra makes a pattern, p5 wraps it around a spinning torus, and a <b>second Hydra instance</b> processes that result with feedback. Three stages in one sketch.</p>
+<div class="code"><div class="bar"><span>hy5 · hydra » p5 » hydra</span><button data-copy>copy</button></div>
+<pre>H.hide()
+
+voronoi(8, 0.2, 0.4)
+  .colorama(0.005)
+  .out()
+
 function setup() {
-  createCanvas(windowWidth, windowHeight)
-  background(245)
-  for (let i = 0; i &lt; 40; i++) w.push({x: width/2, y: height/2})
+  createCanvas(600, 600, WEBGL)
+  angleMode(DEGREES)
+  noStroke()
 }
+
 function draw() {
-  stroke(21, 40)
-  for (let p of w) {
-    let nx = p.x + random(-4, 4), ny = p.y + random(-4, 4)
-    line(p.x, p.y, nx, ny)
-    p.x = nx; p.y = ny
-  }
-}</pre></div>
-<div class="code"><div class="bar"><span>p5live · breathing grid</span><button data-copy>copy</button></div>
-<pre>function setup() { createCanvas(windowWidth, windowHeight) }
-function draw() {
-  background(245)
-  noStroke(); fill(21)
-  for (let x = 40; x &lt; width; x += 60)
-    for (let y = 40; y &lt; height; y += 60)
-      circle(x, y, 30 + sin(frameCount * 0.03 + x * 0.01 + y * 0.01) * 24)
-}</pre></div>
-<div class="code"><div class="bar"><span>p5live · orbit type</span><button data-copy>copy</button></div>
-<pre>let msg = 'FMD450'
+  clear()
+  rotateY(frameCount / 2)
+  rotateX(frameCount / 3)
+  texture(H.get())
+  torus(140, 60, 48, 24)
+}
+
+<span class="cm">// second instance of hydra, with its own namespace</span>
+var H2 = HY5.hydra('h2', 'synth')
+H2.pixelDensity(1)
+H2.zIndex(2)
+
+synth.s0.initP5()
+
+synth.src(synth.s0)
+  .blend(synth.src(synth.o0).scale(1.01).rotate(0.004), 0.6)
+  .out()</pre></div>
+<ul class="plain">
+<li><b>HY5.hydra('h2', 'synth')</b> makes a second, independent Hydra. The first argument names its canvas, the second names the namespace its functions live in.</li>
+<li>That namespace is why the last chain reads <b>synth.src(synth.s0)</b> rather than plain src(s0): the second instance keeps its own sources, outputs and functions so the two Hydras do not collide.</li>
+<li><b>H.hide()</b> hides the first Hydra, since you only want to see it through the torus. <b>H2.zIndex(2)</b> puts the second one on top of everything.</li>
+<li><b>H2.save()</b> saves a frame from the second instance if you bind it to a key.</li>
+</ul>
+<p>Read the flow from the top: voronoi becomes a texture, the texture becomes a rotating object, the object becomes a source, the source gets fed back into itself. Change the order of those stages and you get a completely different piece, which is the point of this section.</p>
+
+<h2><span class="stepno">06</span>Managing the canvases</h2>
+<p>With three canvases stacked, knowing which one you are looking at is half the work.</p>
+<div class="code"><div class="bar"><span>hy5</span><button data-copy>copy</button></div>
+<pre>H.hide()              <span class="cm">// hide hydra</span>
+H.toggle(0)           <span class="cm">// hide, and set its z-index to 0</span>
+P5.toggle(0)          <span class="cm">// same for the p5 canvas</span>
+P5.zIndex(1)          <span class="cm">// put p5 on top</span>
+H.pixelDensity(2)     <span class="cm">// retina, at a cost</span>
+H.pixelDensity(1)     <span class="cm">// half resolution, much faster</span></pre></div>
+<div class="tip"><b>noize() with a z.</b> Hydra and p5 both have a function called noise(), so HY5 renames Hydra's to noize() to avoid the clash. It is the only piece of syntax that changes. If a chain silently does nothing, check this first.</div>
+
+<h2><span class="stepno">07</span>Try it here</h2>
+<p>This runner loads hydra-synth, p5 and HY5 for you. Move your cursor inside the frame.</p>
+<div class="run" data-type="hy5">
+<textarea class="editor" spellcheck="false" rows="6">s0.initP5()
+P5.toggle(0)
+
+src(s0)
+  .kaleid(4)
+  .colorama(0.01)
+  .out()
+
 function setup() {
-  createCanvas(windowWidth, windowHeight)
-  textSize(48); textAlign(CENTER, CENTER); fill(21); noStroke()
+  createCanvas(360, 240)
+  background(20)
+  noStroke()
 }
+
 function draw() {
-  background(245, 30)
-  translate(width/2, height/2)
-  for (let i = 0; i &lt; msg.length; i++) {
-    push()
-    rotate(frameCount * 0.01 + i * TWO_PI / msg.length)
-    text(msg[i], 180, 0)
-    pop()
-  }
-}</pre></div>
-<div class="code"><div class="bar"><span>p5live · scanline</span><button data-copy>copy</button></div>
-<pre>let y = 0
-function setup() {
-  createCanvas(windowWidth, windowHeight)
-  background(245)
-}
-function draw() {
-  stroke(229, 35, 27); strokeWeight(2)
-  line(0, y, width, y)
-  stroke(245, 200)
-  line(0, y - 40, width, y - 40)
-  y = (y + 3) % height
-}</pre></div>
-<div class="code"><div class="bar"><span>p5live · mouse storm</span><button data-copy>copy</button></div>
-<pre>function setup() {
-  createCanvas(windowWidth, windowHeight)
-  background(245)
-}
-function draw() {
-  if (mouseIsPressed) {
-    stroke(21, 60)
-    let a = random(TWO_PI), r = random(80)
-    line(mouseX, mouseY, mouseX + cos(a) * r, mouseY + sin(a) * r)
-  }
-}</pre></div>
-<div class="tip">Local storage means your sketches live in this browser on this machine. Export a .json backup at the end of every session. One lost set teaches this lesson permanently; skip the lesson.</div>
+  let speed = dist(mouseX, mouseY, pmouseX, pmouseY)
+  let s = speed * 3
+  fill(mouseX / 2, 100, 255 - mouseX / 2, 80)
+  circle(mouseX, mouseY, s)
+  circle(width - mouseX, mouseY, s)
+  circle(mouseX, height - mouseY, s)
+  circle(width - mouseX, height - mouseY, s)
+}</textarea>
+<div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
+<div class="stage"></div></div>
+
+<h2><span class="stepno">08</span>If you want to go further</h2>
+<ul class="res">
+<li><b>More sources</b> · s0 through s3 all work. Feed p5 into one and a camera into another, then mix them in a chain.</li>
+<li><b>Sound</b> · Hydra's audio object still works here, so a.fft can drive a Hydra chain and a p5 variable in the same sketch.</li>
+<li><b>More instances</b> · HY5.hydra() is not limited to two. Each extra instance is another stage you can route through.</li>
+<li><a href="https://github.com/ffd8/HY5" target="_blank" rel="noopener">HY5 on GitHub</a> · full documentation and the official examples, which take a different route through the same ideas.</li>
+<li><a href="https://teddavis.org/p5live/" target="_blank" rel="noopener">P5LIVE</a> · ships HY5 as a built-in library, so you can work there instead and get collaborative rooms with it.</li>
+</ul>
 
 <div class="sketch">
-<div class="tag">Sketch 05 · P5LIVE</div>
-<p>A 90-second live-coded performance, screen-recorded in one take: start from under ten lines and grow it live. At least one softCompile evolution (values carrying over) must be visible. Plus: join the class COCODING room during the week and leave one signed contribution.</p>
+<div class="tag">Sketch 05 · Crossing over</div>
+<p>Make one piece using all three directions, or make the same idea three times, once in each direction, and show the difference. Either way, the point is to feel what the order does to the image.</p>
+<p>Submit a 30 to 60 second screen recording, plus your code. In one or two lines, say which order you chose and what it gave you that the other orders could not.</p>
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
@@ -1166,7 +1126,6 @@ function draw() {
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
-
 <!-- ============ DEMO 06 TD II ============ -->
 <section class="demo" id="d06">
 <div class="week">Demo 07</div>
@@ -1340,7 +1299,6 @@ function draw() {
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
-
 <!-- ============ DEMO 08 PROJECTION IN CODE ============ -->
 <section class="demo" id="d08">
 <div class="week">Demo 09</div>
@@ -1567,6 +1525,7 @@ function mousePressed() {
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
 </section>
+
 </main>
 <script>
 // ---------- navigation ----------
@@ -1605,6 +1564,18 @@ document.querySelectorAll('button[data-copy]').forEach(btn => {
 // ---------- runnable code editors ----------
 function buildDoc(kind, code) {
   const s = '<' + 'script>', e = '</' + 'script>';
+  if (kind === 'hy5') {
+    return '<!DOCTYPE html><html><head><style>body{margin:0;font:11px monospace;color:#888}canvas{display:block}</style></head><body>' +
+      '<' + 'script src="https://unpkg.com/hydra-synth"></' + 'script>' +
+      '<' + 'script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></' + 'script>' +
+      '<' + 'script src="https://cdn.jsdelivr.net/gh/ffd8/HY5@main/hy5.js"></' + 'script>' +
+      '<div id="msg"></div>' + s +
+      'window.onerror=function(m){var d=document.getElementById("msg");' +
+      'if(typeof Hydra==="undefined"||typeof p5==="undefined"||typeof s0==="undefined"){' +
+      'd.textContent="libraries could not load: check your connection"}else{d.textContent=m}};\n' +
+      code + '\n' + e +
+      '</body></html>';
+  }
   if (kind === 'hydratext') {
     return '<!DOCTYPE html><html><head><' + 'script src="https://unpkg.com/hydra-synth"></' + 'script>' +
       '<style>body{margin:0;font:11px monospace;color:#888}canvas{display:block}</style></head><body>' +
