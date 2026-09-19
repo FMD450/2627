@@ -904,16 +904,26 @@ function draw() {
   noStroke()
   text("LOOP", width / 2, height / 2)
 }</pre></div>
-<p>Any font the browser can see works this way, including fonts installed on your own machine: textFont('Georgia'). If a font silently does not change, the name is wrong or the link did not load.</p>
+<p>Any font the browser can see works this way, with no link tag needed if it is already on the machine. These are safe on every computer:</p>
+<div class="code"><div class="bar"><span>p5.js · always available</span><button data-copy>copy</button></div>
+<pre>textFont('sans-serif')       <span class="cm">// whatever the system uses, Helvetica or Arial</span>
+textFont('serif')            <span class="cm">// Times or similar</span>
+textFont('monospace')        <span class="cm">// Courier or similar</span>
+textFont('Georgia')
+textFont('Courier New')
+textFont('Verdana')
+textFont('Times New Roman')</pre></div>
+<p>Use one of those while you are building and swap in the real typeface later. If a font silently does not change, the name is spelled wrong or the link tag did not load: there is no error, it just quietly falls back.</p>
 
 <h3>Route B: loadFont, for everything else</h3>
 <p>Needed the moment you want <b>textToPoints</b>, because that reads the actual outlines out of the file and a CSS font name gives it nothing to read.</p>
-<p>Get a file: on Google Fonts press <b>Get font</b> then <b>Download all</b>, unzip, and find the .ttf inside. <a href="https://velvetyne.fr/" target="_blank" rel="noopener">Velvetyne</a> and most foundries give you .otf or .ttf directly. Drag the file into the sketch files panel in the p5 editor, then:</p>
+<div class="tip">There is no system-font shortcut here. loadFont('Georgia') fails, because loadFont wants a file path and the browser will not hand over a font that is merely installed. You need an actual .ttf or .otf sitting next to your sketch.</div>
+<p>Get one: on <a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a> press <b>Get font</b>, then <b>Download all</b>, unzip, and find the .ttf inside. <a href="https://velvetyne.fr/" target="_blank" rel="noopener">Velvetyne</a> and most foundries give you .otf or .ttf directly. <b>Roboto Mono</b> is a safe first choice: free, monospaced, and it holds up when you pull it apart. Drag the file into the sketch files panel in the p5 editor, then:</p>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
 <pre>let font
 
 function preload() {
-  font = loadFont('SpaceMono-Regular.ttf')
+  font = loadFont('RobotoMono-Regular.ttf')
 }
 
 function setup() {
@@ -931,7 +941,7 @@ function draw() {
 }</pre></div>
 <ul class="plain">
 <li><b>preload()</b> waits for the file before anything else runs. Loading a font in setup instead gives you a sketch that works sometimes, which is worse than one that never works.</li>
-<li>The filename must match exactly, capitals included.</li>
+<li>The filename must match exactly, capitals and hyphens included. RobotoMono-Regular.ttf is not robotomono-regular.ttf.</li>
 <li><b>.ttf and .otf only.</b> The .woff2 files that fonts.gstatic.com serves will not load this way.</li>
 <li>Here textFont takes the loaded object, with no quotes, rather than a name in quotes.</li>
 </ul>
@@ -945,7 +955,7 @@ function draw() {
 <pre>let font, pts
 
 function preload() {
-  font = loadFont('font.ttf')
+  font = loadFont('RobotoMono-Regular.ttf')
 }
 
 function setup() {
@@ -1235,7 +1245,7 @@ function draw() {
 <pre>let font, pts
 
 function preload() {
-  font = loadFont('font.ttf')
+  font = loadFont('RobotoMono-Regular.ttf')
 }
 
 function setup() {
@@ -1260,7 +1270,7 @@ src(s0)
   .modulate(noize(2, 0.2), 0.04)
   .colorama(0.01)
   .out()</pre></div>
-<p>textToPoints is covered in demo 04. Drop the font file next to your sketch, and note that HY5LIVE loads local files the same way the p5 editor does.</p>
+<p>textToPoints and font loading are both covered in demo 04. Drop the .ttf next to your sketch, and note that HY5LIVE loads local files the same way the p5 editor does.</p>
 <p class="note">Compare this with demo 03, where hydra-text draws type inside Hydra directly. That route is faster to type and lives entirely in one language. This route gives you real font control, layout, and per-letter logic. Both are correct, and which you choose depends on whether the typography or the signal is doing the heavy lifting.</p>
 
 <h2><span class="stepno">07</span>Managing the canvases</h2>
