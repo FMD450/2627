@@ -21,12 +21,12 @@ nav{position:fixed;top:0;left:0;width:280px;height:100vh;border-right:1px solid 
 nav .course{font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:-.5px;line-height:1}
 nav .coursesub{font-size:11px;color:var(--mute);margin:8px 0 26px;line-height:1.5}
 nav ul{list-style:none}
-nav li a{display:flex;gap:10px;align-items:baseline;padding:7px 6px;color:var(--ink);
+nav li a{display:flex;gap:10px;align-items:baseline;padding:7px 6px 7px 10px;color:var(--ink);
   text-decoration:none;font-size:12.5px;border-radius:2px}
 nav li a:hover{background:var(--panel)}
-nav li a.active{background:var(--ink);color:var(--paper)}
+nav li a.active{background:none;color:var(--ink);font-weight:500;box-shadow:inset 3px 0 0 var(--ink)}
 nav li a .n{color:var(--mute);font-size:11px;min-width:22px}
-nav li a.active .n{color:var(--paper);opacity:.6}
+nav li a.active .n{color:var(--ink);opacity:1}
 nav li a .rec{width:7px;height:7px;border-radius:50%;background:var(--rec);margin-left:auto;
   align-self:center;opacity:0}
 nav li a.active .rec{opacity:1;animation:blink 1.4s steps(1) infinite}
@@ -394,7 +394,7 @@ osc(30, 0.1, [0, 1.5].smooth()).out()        <span class="cm">// glide, not step
 <li><a href="https://hydra.ojack.xyz/docs/" target="_blank" rel="noopener">Hydra documentation</a>: the official getting-started and guides</li>
 <li><a href="https://hydra.ojack.xyz/functions/" target="_blank" rel="noopener">Interactive function reference</a>: every function with a live editable example</li>
 <li><a href="https://hydra.ojack.xyz/garden/" target="_blank" rel="noopener">Hydra garden</a>: community, examples, performances</li>
-<li><a href="https://hydra-book.glitches.me/#/" target="_blank" rel="noopener">Hydra Book</a> by Naoto Hieda: techniques organized as a free book</li>
+<li><a href="https://github.com/naotohieda/hydra-book" target="_blank" rel="noopener">Hydra Book</a> by Naoto Hieda: techniques organized as a free book</li>
 <li><a href="https://github.com/hydra-synth" target="_blank" rel="noopener">hydra-synth on GitHub</a>: the source, extensions, and related projects</li>
 </ul>
 <div class="tip">Read one patch aloud in signal-path English before you run it: "an oscillator, kaleided by noise, differenced against its twin." If you cannot say it, you copied it.</div>
@@ -917,13 +917,14 @@ textFont('Times New Roman')</pre></div>
 
 <h3>Route B: loadFont, for everything else</h3>
 <p>Needed the moment you want <b>textToPoints</b>, because that reads the actual outlines out of the file and a CSS font name gives it nothing to read.</p>
-<div class="tip">There is no system-font shortcut here. loadFont('Georgia') fails, because loadFont wants a file path and the browser will not hand over a font that is merely installed. You need an actual .ttf or .otf sitting next to your sketch.</div>
-<p>Get one: on <a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a> press <b>Get font</b>, then <b>Download all</b>, unzip, and find the .ttf inside. <a href="https://velvetyne.fr/" target="_blank" rel="noopener">Velvetyne</a> and most foundries give you .otf or .ttf directly. <b>Roboto Mono</b> is a safe first choice: free, monospaced, and it holds up when you pull it apart. Drag the file into the sketch files panel in the p5 editor, then:</p>
+<div class="tip">There is no system-font shortcut here. loadFont('Georgia') fails, because loadFont wants a file and the browser will not hand over a font that is merely installed. You need an actual .ttf or .otf.</div>
+<p>Two ways to give it one.</p>
+<p><b>A file next to your sketch.</b> On <a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a> press Get font, then Download all, unzip, and find the .ttf inside. <a href="https://velvetyne.fr/" target="_blank" rel="noopener">Velvetyne</a> and most foundries give you .otf or .ttf directly. Drag the file into the sketch files panel in the p5 editor and call it by name:</p>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
 <pre>let font
 
 function preload() {
-  font = loadFont('RobotoMono-Regular.ttf')
+  font = loadFont('SpaceMono-Regular.ttf')
 }
 
 function setup() {
@@ -939,9 +940,15 @@ function draw() {
   noStroke()
   text("LOOP", width / 2, height / 2)
 }</pre></div>
+<p><b>Or straight from a URL,</b> which is what you need in editors with no file panel, like HY5LIVE. The server has to allow it, and jsDelivr does:</p>
+<div class="code"><div class="bar"><span>p5.js · font from a url</span><button data-copy>copy</button></div>
+<pre>function preload() {
+  font = loadFont('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/spacemono/SpaceMono-Regular.ttf')
+}</pre></div>
+<p>That path is the Google Fonts repository mirrored by jsDelivr, so any family in it works: swap the folder and filename for another. Note that <b>Google Fonts' own CSS links will not work here</b>, because fonts.gstatic.com serves .woff2 and p5 can only read .ttf and .otf. Check the real path on GitHub before you rely on it, since some families are stored as variable fonts under a different folder.</p>
 <ul class="plain">
 <li><b>preload()</b> waits for the file before anything else runs. Loading a font in setup instead gives you a sketch that works sometimes, which is worse than one that never works.</li>
-<li>The filename must match exactly, capitals and hyphens included. RobotoMono-Regular.ttf is not robotomono-regular.ttf.</li>
+<li>The filename must match exactly, capitals and hyphens included. SpaceMono-Regular.ttf is not spacemono-regular.ttf.</li>
 <li><b>.ttf and .otf only.</b> The .woff2 files that fonts.gstatic.com serves will not load this way.</li>
 <li>Here textFont takes the loaded object, with no quotes, rather than a name in quotes.</li>
 </ul>
@@ -955,7 +962,7 @@ function draw() {
 <pre>let font, pts
 
 function preload() {
-  font = loadFont('RobotoMono-Regular.ttf')
+  font = loadFont('SpaceMono-Regular.ttf')
 }
 
 function setup() {
@@ -1245,7 +1252,7 @@ function draw() {
 <pre>let font, pts
 
 function preload() {
-  font = loadFont('RobotoMono-Regular.ttf')
+  font = loadFont('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/spacemono/SpaceMono-Regular.ttf')
 }
 
 function setup() {
@@ -1270,7 +1277,7 @@ src(s0)
   .modulate(noize(2, 0.2), 0.04)
   .colorama(0.01)
   .out()</pre></div>
-<p>textToPoints and font loading are both covered in demo 04. Drop the .ttf next to your sketch, and note that HY5LIVE loads local files the same way the p5 editor does.</p>
+<p>textToPoints and font loading are both covered in demo 04. HY5LIVE has no file panel, so the font is loaded from a URL here: jsDelivr mirrors the Google Fonts repository and allows cross-origin requests, which a font file needs. If you would rather drop a .ttf next to your sketch, work in the p5 editor or P5LIVE instead.</p>
 <p class="note">Compare this with demo 03, where hydra-text draws type inside Hydra directly. That route is faster to type and lives entirely in one language. This route gives you real font control, layout, and per-letter logic. Both are correct, and which you choose depends on whether the typography or the signal is doing the heavy lifting.</p>
 
 <h2><span class="stepno">07</span>Managing the canvases</h2>
