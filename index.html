@@ -810,7 +810,204 @@ function draw() {
 }</pre></div>
 <p>Same circle, four places. width is 600, so <b>width - mouseX</b> is the mirror position: mouse 100 from the left becomes 100 from the right. You did not draw that shape. You drew a squiggle, and a rule turned it into that.</p>
 
-<h2><span class="stepno">11</span>Try it here</h2>
+<h2><span class="stepno">11</span>Type</h2>
+<p>p5 draws text with no extension needed, unlike Hydra. Anything you can do to a shape you can do to a word.</p>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  createCanvas(600, 300)
+  textAlign(CENTER, CENTER)
+  textSize(120)
+}
+
+function draw() {
+  background(245)
+  fill(21)
+  noStroke()
+  text("LOOP", width / 2, height / 2)
+}</pre></div>
+<ul class="plain">
+<li><b>text(string, x, y)</b> draws the word. It uses the current fill, exactly like a shape.</li>
+<li><b>textAlign(CENTER, CENTER)</b> sets which part of the text sits at that x and y. The default is the left edge and the baseline, which is why type usually lands somewhere you did not expect.</li>
+<li><b>textSize()</b>, <b>textStyle(BOLD)</b>, <b>textLeading()</b> and <b>textWidth(string)</b> do what their names say. <b>textFont()</b> sets the typeface, covered in the next section.</li>
+</ul>
+<p>The interesting move is to stop treating a word as one object. Split it into letters and give each one its own rule:</p>
+<div class="code"><div class="bar"><span>p5.js · one rule, every letter</span><button data-copy>copy</button></div>
+<pre>let word = "TRANSLATE"
+
+function setup() {
+  createCanvas(600, 300)
+  textAlign(CENTER, CENTER)
+  textStyle(BOLD)
+}
+
+function draw() {
+  background(245)
+  noStroke()
+  fill(21)
+  let step = width / word.length
+  for (let i = 0; i &lt; word.length; i++) {
+    let x = step * i + step / 2
+    let d = dist(mouseX, mouseY, x, height / 2)
+    let s = map(d, 0, 300, 140, 30)
+    textSize(s)
+    text(word.charAt(i), x, height / 2)
+  }
+}</pre></div>
+<p><b>word.charAt(i)</b> pulls out one letter, and the loop places each at its own x. Every letter asks the same question, how far am I from the cursor, and answers differently. Swap textSize for a rotation and the word starts to fall apart:</p>
+<div class="code"><div class="bar"><span>p5.js · letters that turn</span><button data-copy>copy</button></div>
+<pre>let word = "SOURCE"
+
+function setup() {
+  createCanvas(600, 300)
+  textAlign(CENTER, CENTER)
+  textSize(90)
+}
+
+function draw() {
+  background(20)
+  noStroke()
+  fill(245)
+  let step = width / word.length
+  for (let i = 0; i &lt; word.length; i++) {
+    let x = step * i + step / 2
+    let d = dist(mouseX, mouseY, x, height / 2)
+    push()
+    translate(x, height / 2)
+    rotate(map(d, 0, 400, 1.2, 0))
+    text(word.charAt(i), 0, 0)
+    pop()
+  }
+}</pre></div>
+<p>Legibility is now a variable you control. How far can a word bend before it stops being a word is a typography question, not a coding one.</p>
+
+<h2><span class="stepno">12</span>Loading a font</h2>
+<p>p5 falls back to the browser default until you give it something better. There are two routes, and <b>they are not interchangeable</b>, so pick by what you plan to do.</p>
+
+<h3>Route A: the CSS way, for drawing text</h3>
+<p>Quick, no files to manage, and it works with any Google Font. In the p5 editor, open <b>index.html</b> from the file panel and paste the link tag from Google Fonts into the head:</p>
+<div class="code"><div class="bar"><span>index.html</span><button data-copy>copy</button></div>
+<pre>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</pre></div>
+<p>Then name it in your sketch, exactly as the family is written:</p>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>function setup() {
+  createCanvas(600, 300)
+  textFont('Space Mono')
+  textSize(90)
+  textAlign(CENTER, CENTER)
+}
+
+function draw() {
+  background(245)
+  fill(21)
+  noStroke()
+  text("LOOP", width / 2, height / 2)
+}</pre></div>
+<p>Any font the browser can see works this way, including fonts installed on your own machine: textFont('Georgia'). If a font silently does not change, the name is wrong or the link did not load.</p>
+
+<h3>Route B: loadFont, for everything else</h3>
+<p>Needed the moment you want <b>textToPoints</b>, because that reads the actual outlines out of the file and a CSS font name gives it nothing to read.</p>
+<p>Get a file: on Google Fonts press <b>Get font</b> then <b>Download all</b>, unzip, and find the .ttf inside. <a href="https://velvetyne.fr/" target="_blank" rel="noopener">Velvetyne</a> and most foundries give you .otf or .ttf directly. Drag the file into the sketch files panel in the p5 editor, then:</p>
+<div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
+<pre>let font
+
+function preload() {
+  font = loadFont('SpaceMono-Regular.ttf')
+}
+
+function setup() {
+  createCanvas(600, 300)
+  textFont(font)
+  textSize(90)
+  textAlign(CENTER, CENTER)
+}
+
+function draw() {
+  background(245)
+  fill(21)
+  noStroke()
+  text("LOOP", width / 2, height / 2)
+}</pre></div>
+<ul class="plain">
+<li><b>preload()</b> waits for the file before anything else runs. Loading a font in setup instead gives you a sketch that works sometimes, which is worse than one that never works.</li>
+<li>The filename must match exactly, capitals included.</li>
+<li><b>.ttf and .otf only.</b> The .woff2 files that fonts.gstatic.com serves will not load this way.</li>
+<li>Here textFont takes the loaded object, with no quotes, rather than a name in quotes.</li>
+</ul>
+<div class="tip">Short version: <b>drawing words</b>, either route works and the CSS one is faster. <b>Doing anything with the letterforms themselves</b>, you need loadFont and a real file.</div>
+<p class="note">Fonts are licensed work. Google Fonts and Velvetyne are free to use and redistribute. A commercial font you licensed for print is usually not licensed to be uploaded somewhere public, so check before you publish a sketch with one in it.</p>
+
+<h2><span class="stepno">13</span>Type as points</h2>
+<p>The technique worth stealing. <b>textToPoints()</b> takes a word and hands back the coordinates along its outlines, as a list. The letters stop being type and become positions you can draw anything at.</p>
+<p>This needs route B from the previous section: a real font file loaded with loadFont, not a CSS font name.</p>
+<div class="code"><div class="bar"><span>p5.js · letters made of dots</span><button data-copy>copy</button></div>
+<pre>let font, pts
+
+function preload() {
+  font = loadFont('font.ttf')
+}
+
+function setup() {
+  createCanvas(600, 300)
+  noStroke()
+  pts = font.textToPoints('TYPE', 0, 0, 200, { sampleFactor: 0.15 })
+}
+
+function draw() {
+  background(20)
+  fill(245)
+  translate(60, 220)
+  for (let i = 0; i &lt; pts.length; i++) {
+    let p = pts[i]
+    let s = 6 + sin(i * 0.3 + frameCount * 0.05) * 5
+    circle(p.x, p.y, s)
+  }
+}</pre></div>
+<ul class="plain">
+<li><b>preload()</b> is a third special function alongside setup and draw. It runs before everything else and waits for files to finish loading, which is where fonts, images and data go.</li>
+<li><b>textToPoints(word, x, y, size, options)</b> returns an array of points. Each one has a .x and a .y.</li>
+<li><b>sampleFactor</b> is the density: 0.05 gives a sparse scatter, 0.5 packs them tight. This is the dial you will actually tune.</li>
+<li>Once you have the points, the word is just a shape. Draw circles, lines, images, other letters.</li>
+</ul>
+<p>Every point can answer a question, exactly like the grid in the loops section:</p>
+<div class="code"><div class="bar"><span>p5.js · points that respond</span><button data-copy>copy</button></div>
+<pre>function draw() {
+  background(245)
+  fill(21)
+  translate(70, 220)
+  for (let i = 0; i &lt; pts.length; i++) {
+    let p = pts[i]
+    let d = dist(mouseX - 70, mouseY - 220, p.x, p.y)
+    let s = map(d, 0, 200, 22, 2)
+    circle(p.x, p.y, s)
+  }
+}</pre></div>
+<p>Subtract the translate from the mouse position so both are measured from the same origin. Or feed the points into a single shape instead, and the word becomes one wobbling outline:</p>
+<div class="code"><div class="bar"><span>p5.js · one continuous line</span><button data-copy>copy</button></div>
+<pre>function draw() {
+  background(245)
+  stroke(21)
+  noFill()
+  translate(60, 220)
+  beginShape()
+  for (let i = 0; i &lt; pts.length; i++) {
+    let p = pts[i]
+    vertex(p.x + sin(frameCount * 0.03 + i * 0.2) * 6, p.y)
+  }
+  endShape()
+}</pre></div>
+<p>To centre a word rather than guessing at the translate, ask the font for its bounding box first:</p>
+<div class="code"><div class="bar"><span>p5.js · centred</span><button data-copy>copy</button></div>
+<pre>function genType(txt, size) {
+  textSize(size)
+  let b = font.textBounds(txt, 0, 0, size)
+  pts = font.textToPoints(txt, -b.w / 2, -b.h / 2, size, { sampleFactor: 0.15 })
+}</pre></div>
+<p>Then translate to the centre of the canvas and draw. Call genType() again from keyPressed() and the word changes live while the sketch is running.</p>
+<p class="note">This example comes from the P5LIVE demo set by Ted Davis. In newer p5 versions loadFont is awaited inside an async setup rather than called in preload, so check which version your editor is running if it complains.</p>
+
+<h2><span class="stepno">14</span>Try it here</h2>
 <p>Edit the code and run it. Move your cursor inside the frame to draw.</p>
 <div class="run" data-type="p5">
 <textarea class="editor" spellcheck="false" rows="6">function setup() {
@@ -831,7 +1028,7 @@ function draw() {
 <div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
 <div class="stage"></div></div>
 
-<h2><span class="stepno">12</span>Saving, and reading errors</h2>
+<h2><span class="stepno">15</span>Saving, and reading errors</h2>
 <div class="code"><div class="bar"><span>p5.js</span><button data-copy>copy</button></div>
 <pre>function keyPressed() {
   if (key === 's') saveCanvas('brush', 'png')
@@ -839,7 +1036,7 @@ function draw() {
 }</pre></div>
 <p>saveGif('loop', 4) records four seconds, which is the fastest route to a sketch submission. Errors appear in the console at the bottom of the editor <b>with a line number</b>: read that line and the one above it. Almost every error you hit this semester is a missing bracket, a capital letter in the wrong place, or a variable used before it was made.</p>
 
-<h2><span class="stepno">13</span>If you want to go further</h2>
+<h2><span class="stepno">16</span>If you want to go further</h2>
 <p>None of this is needed for the sketch, but it is where p5 opens up.</p>
 <ul class="res">
 <li><b>Loops</b> · one line that draws two hundred shapes instead of one. A for loop walks across the canvas, and a loop inside a loop gives you a grid where every cell asks the same question and answers differently.</li>
@@ -852,7 +1049,7 @@ function draw() {
 
 <div class="sketch">
 <div class="tag">Sketch 04 · Your brush</div>
-<p>Start from the brush we built and make it yours. Change at least three things: the colours, the background, the shape it draws with, the transparency, the brush weight, the number of mirrors. Build your own nib with beginShape and vertex if you want one.</p>
+<p>Either make a brush or make a typographic sketch. For the brush: start from the one we built and make it yours. Change at least three things: the colours, the background, the shape it draws with, the transparency, the brush weight, the number of mirrors. Build your own nib with beginShape and vertex if you want one. For the type route: take one word, split it into letters or into points with textToPoints, and give each one a rule that responds to the cursor.</p>
 <p>Submit a still you are happy with, plus a 20 to 30 second screen recording of you drawing with it. A version run through Hydra is welcome: see the next demo.</p>
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
@@ -980,7 +1177,93 @@ synth.src(synth.s0)
 </ul>
 <p>Read the flow from the top: voronoi becomes a texture, the texture becomes a rotating object, the object becomes a source, the source gets fed back into itself. Change the order of those stages and you get a completely different piece, which is the point of this section.</p>
 
-<h2><span class="stepno">06</span>Managing the canvases</h2>
+<h2><span class="stepno">06</span>Type across the bridge</h2>
+<p>This is where the bridge earns its keep for designers. Hydra needs an extension to draw a word. p5 draws type natively, with any font you load, so <b>p5 into Hydra gives you typography with the full Hydra vocabulary on top of it</b>.</p>
+<div class="code"><div class="bar"><span>hy5 · type » hydra</span><button data-copy>copy</button></div>
+<pre>s0.initP5()
+P5.toggle(0)
+
+src(s0)
+  .modulate(noize(2, 0.2), 0.03)
+  .colorama(0.01)
+  .out()
+
+function setup() {
+  createCanvas(600, 300)
+  textAlign(CENTER, CENTER)
+  textSize(150)
+  textStyle(BOLD)
+}
+
+function draw() {
+  background(0)
+  fill(255)
+  noStroke()
+  text("TRANSLATE", width / 2, height / 2)
+}</pre></div>
+<p>White type on black, because Hydra reads brightness: the white is what the chain has to work with and the black is nothing. Keep the modulate amount low, around 0.03, and the letters breathe while staying readable. Push it to 0.3 and the word dissolves.</p>
+<p>Now the same idea with the word falling apart into letters, feeding a feedback loop:</p>
+<div class="code"><div class="bar"><span>hy5 · letters into feedback</span><button data-copy>copy</button></div>
+<pre>s0.initP5()
+P5.toggle(0)
+
+src(s0)
+  .blend(src(o0).scale(1.01).rotate(0.002), 0.75)
+  .colorama(0.004)
+  .out()
+
+function setup() {
+  createCanvas(600, 300)
+  textAlign(CENTER, CENTER)
+  textSize(140)
+}
+
+function draw() {
+  background(0)
+  fill(255)
+  noStroke()
+  let word = "LOOP"
+  let step = width / word.length
+  for (let i = 0; i &lt; word.length; i++) {
+    let y = height / 2 + sin(frameCount * 0.02 + i) * 40
+    text(word.charAt(i), step * i + step / 2, y)
+  }
+}</pre></div>
+<p>Each letter drifts on its own sine wave in p5, and the Hydra feedback smears the trail behind them. Neither tool could do this alone: p5 has no feedback buffer and Hydra has no fonts.</p>
+<p>And the strongest version: letterforms turned into points in p5, then run through Hydra. The type is built from thousands of small marks, and Hydra treats the whole field as signal.</p>
+<div class="code"><div class="bar"><span>hy5 · textToPoints » hydra</span><button data-copy>copy</button></div>
+<pre>let font, pts
+
+function preload() {
+  font = loadFont('font.ttf')
+}
+
+function setup() {
+  createCanvas(600, 300)
+  noStroke()
+  pts = font.textToPoints('TRANSLATE', 0, 0, 120, { sampleFactor: 0.2 })
+  s0.initP5()
+  P5.toggle(0)
+}
+
+function draw() {
+  background(0)
+  fill(255)
+  translate(40, 200)
+  for (let i = 0; i &lt; pts.length; i++) {
+    let p = pts[i]
+    circle(p.x, p.y, 5 + sin(i * 0.2 + frameCount * 0.05) * 4)
+  }
+}
+
+src(s0)
+  .modulate(noize(2, 0.2), 0.04)
+  .colorama(0.01)
+  .out()</pre></div>
+<p>textToPoints is covered in demo 04. Drop the font file next to your sketch, and note that HY5LIVE loads local files the same way the p5 editor does.</p>
+<p class="note">Compare this with demo 03, where hydra-text draws type inside Hydra directly. That route is faster to type and lives entirely in one language. This route gives you real font control, layout, and per-letter logic. Both are correct, and which you choose depends on whether the typography or the signal is doing the heavy lifting.</p>
+
+<h2><span class="stepno">07</span>Managing the canvases</h2>
 <p>With three canvases stacked, knowing which one you are looking at is half the work.</p>
 <div class="code"><div class="bar"><span>hy5</span><button data-copy>copy</button></div>
 <pre>H.hide()              <span class="cm">// hide hydra</span>
@@ -991,7 +1274,7 @@ H.pixelDensity(2)     <span class="cm">// retina, at a cost</span>
 H.pixelDensity(1)     <span class="cm">// half resolution, much faster</span></pre></div>
 <div class="tip"><b>noize() with a z.</b> Hydra and p5 both have a function called noise(), so HY5 renames Hydra's to noize() to avoid the clash. It is the only piece of syntax that changes. If a chain silently does nothing, check this first.</div>
 
-<h2><span class="stepno">07</span>Try it here</h2>
+<h2><span class="stepno">08</span>Try it here</h2>
 <p>This runner loads hydra-synth, p5 and HY5 for you. Move your cursor inside the frame.</p>
 <div class="run" data-type="hy5">
 <textarea class="editor" spellcheck="false" rows="6">s0.initP5()
@@ -1020,7 +1303,7 @@ function draw() {
 <div class="runbar"><button class="go">run</button><button class="reset">reset</button><span class="hint">edit the code, then run it</span></div>
 <div class="stage"></div></div>
 
-<h2><span class="stepno">08</span>If you want to go further</h2>
+<h2><span class="stepno">09</span>If you want to go further</h2>
 <ul class="res">
 <li><b>More sources</b> · s0 through s3 all work. Feed p5 into one and a camera into another, then mix them in a chain.</li>
 <li><b>Sound</b> · Hydra's audio object still works here, so a.fft can drive a Hydra chain and a p5 variable in the same sketch.</li>
@@ -1031,7 +1314,7 @@ function draw() {
 
 <div class="sketch">
 <div class="tag">Sketch 05 · Crossing over</div>
-<p>Make one piece using all three directions, or make the same idea three times, once in each direction, and show the difference. Either way, the point is to feel what the order does to the image.</p>
+<p>Make one piece using all three directions, or make the same idea three times, once in each direction, and show the difference. Either way, the point is to feel what the order does to the image. A typographic piece is a strong choice here: p5 for the letters, Hydra for everything that happens to them.</p>
 <p>Submit a 30 to 60 second screen recording, plus your code. In one or two lines, say which order you chose and what it gave you that the other orders could not.</p>
 <p class="due">Due the following Monday, start of class. Upload your recording to the class Google Drive folder before class.</p>
 </div>
